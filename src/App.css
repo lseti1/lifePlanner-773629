@@ -1,0 +1,200 @@
+/* This adds the comment block to write text inside */
+
+.App {
+  text-align: center;
+}
+
+.topNamePlate {
+  /* Relates to the actual text-positioning inside the box */
+  display: grid; /* need both display and place-items to be set to these for text to align in the very centre */
+  grid-template-columns: 1fr auto; /* Title takes remaining space, button takes as much as needed */
+  align-items: center; /* align-items centers stuff vertically, place-items does it both vertically and horizontally */
+  padding-left: 40px; /* Add space on the left side of the text */
+  font-size: 32px;
+  font-weight: 700;
+  background-color: rgb(228, 228, 228);
+  border: 1px solid rgba(128, 128, 128, 0.589);
+
+  /* Relates to the actual size of the box */
+  width: 100%;
+  height: 70px;
+  /* border: 1px solid rgb(0, 0, 0); */
+  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
+
+  /* Relates to the actual positioning of the box */
+  position: absolute; /* This is the type of positioning mode, where absolute means you set it exactly */
+  top: 0px;
+  left: 0px; /* -2 here since the border is 2px and the width goes all the way across using 100% */
+  
+}
+
+.accountButton {
+  width: 50px; /* Same width and height for a perfect circle */
+  height: 50px;
+  border-radius: 50%; /* Makes the button circular */
+  background-color: #1900ff00; /* Button background color */
+  border: 1px solid black; /* Removes default border */
+  cursor: pointer; /* Adds pointer cursor for hover */
+  display: flex; /* Flexbox to center content inside the circle */
+  justify-content: center; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
+  font-size: 16px; /* Adjust font size for readability */ 
+
+  position: absolute;
+  right: 32px;
+}
+
+.filterBar {
+  /* Relates to the actual text-positioning inside the box */
+  display: grid;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  grid-template-columns: 50px 1fr 1fr 1fr 1fr; /* This sets the first column as 40px, then 1fr for the rest of the columns */
+  gap: 10px; /*  If you want spacing between the buttons */
+
+  /* Relates to the actual size of the box */
+  width: 21%;
+  height: 40px;
+  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
+
+  /* Relates to the actual positioning of the box */
+  position:absolute;
+  top: 155px;
+  right: 30px;
+}
+
+.filterButtons {
+  display: grid;
+
+}
+
+.addBar {
+  /* Relates to the actual text-positioning inside the box */
+  display: grid;
+  place-items: center;
+  grid-template-columns: 180px 100px;
+  background-color: rgb(228, 228, 228);
+  border: 1px solid rgba(128, 128, 128, 0.589);
+
+  /* Relates to the actual size of the box */
+  width: 25%;
+  height: 40px;
+  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
+
+  /* Relates to the actual positioning of the box */
+  position: absolute;
+  top: 104px;
+  left: 25px;
+}
+
+.calendarTitle {
+  /* Relates to the actual text-positioning inside the box */
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  font-weight: 500;
+
+  /* Relates to the actual size of the box */
+  width: 65%;
+  height: 50px;
+  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
+  background-color: rgb(228, 228, 228);
+  border: 1px solid rgba(128, 128, 128, 0.589);
+
+  /* Relates to the actual positioning of the box */
+  position: absolute;
+  top: 150px;
+  right: 25px;
+}
+
+.daysOfWeek {
+  /* Relates to the actual text-positioning inside the box */
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(7, auto);
+  background-color: rgb(228, 228, 228);
+  border: 1px solid rgba(128, 128, 128, 0.589);
+
+  /* Relates to the actual size of the box */
+  width: 65%;
+  height: 30px;
+  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
+
+  /* Relates to the actual positioning of the box */
+  position: absolute;
+  top: 200px;
+  right: 25px;
+}
+
+.daysGrid {
+  /* Relates to the actual text-positioning inside the box */
+  display: grid;
+  place-items: center;
+
+  /* Relates to the actual size of the box */
+  width: 65%;
+  height: 72.5%;
+  border: 2px solid black;
+  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
+  background-color: lightgray;
+
+  /* Relates to the actual positioning of the box */
+  position: absolute;
+  top: 230px;
+  right: 25px;
+}
+
+.today {
+  /* Relates to the actual text-positioning inside the box */
+  display: grid;
+  place-items: center;
+
+  /* Relates to the actual size of the box */
+  width: 30%;
+  height: 400px;
+  border: 2px solid black;
+  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
+  background-color: lightgray;
+
+  /* Relates to the actual positioning of the box */
+  position: absolute;
+  top: 150px;
+  left: 25px;
+}
+
+.tomorrow {
+  /* Relates to the actual text-positioning inside the box */
+  display: grid;
+  place-items: center;
+
+  /* Relates to the actual size of the box */
+  width: 30%;
+  height: 200px;
+  border: 2px solid black;
+  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
+  background-color: lightgray;
+
+  /* Relates to the actual positioning of the box */
+  position: absolute;
+  top: 575px;
+  left: 25px;
+}
+
+.otherUtilities {
+    /* Relates to the actual text-positioning inside the box */
+  display: grid;
+  place-items: center;
+
+  /* Relates to the actual size of the box */
+  width: 30%;
+  height: 11%;
+  border: 2px solid black;
+  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
+  background-color: lightgray;
+
+  /* Relates to the actual positioning of the box */
+  position: absolute;
+  top: 800px;
+  left: 25px;
+}
