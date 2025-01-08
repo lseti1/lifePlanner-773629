@@ -19,7 +19,7 @@ body { /* This is for the background (under layer) */
   padding-left: 40px; /* Add space on the left side of the text */
   font-size: 32px;
   font-weight: 700;
-  background-color: rgba(0, 0, 0, 0.38);
+  background-color: rgba(0, 0, 0, 0.50);
   color: rgb(255, 255, 255);
 
   /* Relates to the actual size of the box */
@@ -46,9 +46,15 @@ body { /* This is for the background (under layer) */
   justify-content: center; /* Centers content horizontally */
   align-items: center; /* Centers content vertically */
   font-size: 16px; /* Adjust font size for readability */ 
+  transition: background-color 0.3s, color 0.3s; /* Add smooth transitions */
 
   position: absolute;
   right: 32px;
+}
+
+.accountButton:hover {
+  background-color: rgb(58, 39, 226); /* Slightly visible background on hover */
+  color: white; /* Keep text white */
 }
 
 .filterBar {
@@ -74,6 +80,16 @@ body { /* This is for the background (under layer) */
 
 .filterButtons {
   display: grid;
+  background-color: hsla(0, 0%, 100%, 0.274);
+  color: white;
+  border: 0px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Add smooth transitions */
+}
+
+.filterButtons:hover {
+  background-color: rgb(58, 39, 226); /* Slightly visible background on hover */
+  color: white; /* Keep text white */
 }
 
 .addBar {
@@ -81,7 +97,7 @@ body { /* This is for the background (under layer) */
   display: grid;
   place-items: center;
   grid-template-columns: 180px 100px;
-  background-color: rgba(0, 0, 0, 0.38);
+  background-color: rgba(0, 0, 0, 0.50);
   color: rgb(255, 255, 255);
 
   /* Relates to the actual size of the box */
@@ -106,7 +122,7 @@ body { /* This is for the background (under layer) */
   width: 65%;
   height: 50px;
   box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
-  background-color: rgba(0, 0, 0, 0.38);
+  background-color: rgba(0, 0, 0, 0.50);
   color: rgb(255, 255, 255);
 
   /* Relates to the actual positioning of the box */
@@ -120,7 +136,7 @@ body { /* This is for the background (under layer) */
   display: grid;
   place-items: center;
   grid-template-columns: repeat(7, auto);
-  background-color: rgba(0, 0, 0, 0.38);
+  background-color: rgba(0, 0, 0, 0.50);
   color: rgb(255, 255, 255);
 
   /* Relates to the actual size of the box */
