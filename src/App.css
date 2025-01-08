@@ -2,6 +2,13 @@
 
 .App {
   text-align: center;
+  background-color: black;
+}
+
+body { /* This is for the background (under layer) */
+  background-image: url('/public/backgroundImage.jpg'); /* Path to your image */
+  background-size: cover; /* Ensures the image fills the screen */
+  background-repeat: no-repeat; /* Prevents repetition */
 }
 
 .topNamePlate {
@@ -12,8 +19,8 @@
   padding-left: 40px; /* Add space on the left side of the text */
   font-size: 32px;
   font-weight: 700;
-  background-color: rgb(228, 228, 228);
-  border: 1px solid rgba(128, 128, 128, 0.589);
+  background-color: rgba(0, 0, 0, 0.38);
+  color: rgb(255, 255, 255);
 
   /* Relates to the actual size of the box */
   width: 100%;
@@ -32,8 +39,8 @@
   width: 50px; /* Same width and height for a perfect circle */
   height: 50px;
   border-radius: 50%; /* Makes the button circular */
-  background-color: #1900ff00; /* Button background color */
-  border: 1px solid black; /* Removes default border */
+  background-color: rgba(0, 0, 0, 0.38);
+  color: rgb(255, 255, 255);
   cursor: pointer; /* Adds pointer cursor for hover */
   display: flex; /* Flexbox to center content inside the circle */
   justify-content: center; /* Centers content horizontally */
@@ -52,6 +59,7 @@
   padding-right: 20px;
   grid-template-columns: 50px 1fr 1fr 1fr 1fr; /* This sets the first column as 40px, then 1fr for the rest of the columns */
   gap: 10px; /*  If you want spacing between the buttons */
+  color: white;
 
   /* Relates to the actual size of the box */
   width: 21%;
@@ -66,7 +74,6 @@
 
 .filterButtons {
   display: grid;
-
 }
 
 .addBar {
@@ -74,13 +81,13 @@
   display: grid;
   place-items: center;
   grid-template-columns: 180px 100px;
-  background-color: rgb(228, 228, 228);
-  border: 1px solid rgba(128, 128, 128, 0.589);
+  background-color: rgba(0, 0, 0, 0.38);
+  color: rgb(255, 255, 255);
 
   /* Relates to the actual size of the box */
   width: 25%;
   height: 40px;
-  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
+  box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
 
   /* Relates to the actual positioning of the box */
   position: absolute;
@@ -98,9 +105,9 @@
   /* Relates to the actual size of the box */
   width: 65%;
   height: 50px;
-  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
-  background-color: rgb(228, 228, 228);
-  border: 1px solid rgba(128, 128, 128, 0.589);
+  box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
+  background-color: rgba(0, 0, 0, 0.38);
+  color: rgb(255, 255, 255);
 
   /* Relates to the actual positioning of the box */
   position: absolute;
@@ -113,13 +120,13 @@
   display: grid;
   place-items: center;
   grid-template-columns: repeat(7, auto);
-  background-color: rgb(228, 228, 228);
-  border: 1px solid rgba(128, 128, 128, 0.589);
+  background-color: rgba(0, 0, 0, 0.38);
+  color: rgb(255, 255, 255);
 
   /* Relates to the actual size of the box */
   width: 65%;
   height: 30px;
-  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
+  box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
 
   /* Relates to the actual positioning of the box */
   position: absolute;
@@ -135,9 +142,9 @@
   /* Relates to the actual size of the box */
   width: 65%;
   height: 72.5%;
-  border: 2px solid black;
-  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
-  background-color: lightgray;
+  background-color: rgba(0, 0, 0, 0.38);
+  color: rgb(255, 255, 255);
+  box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
 
   /* Relates to the actual positioning of the box */
   position: absolute;
@@ -153,9 +160,9 @@
   /* Relates to the actual size of the box */
   width: 30%;
   height: 400px;
-  border: 2px solid black;
-  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
-  background-color: lightgray;
+  background-color: rgba(0, 0, 0, 0.38);
+  color: rgb(255, 255, 255);
+  box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
 
   /* Relates to the actual positioning of the box */
   position: absolute;
@@ -171,9 +178,9 @@
   /* Relates to the actual size of the box */
   width: 30%;
   height: 200px;
-  border: 2px solid black;
-  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
-  background-color: lightgray;
+  background-color: rgba(0, 0, 0, 0.38);
+  color: rgb(255, 255, 255);
+  box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
 
   /* Relates to the actual positioning of the box */
   position: absolute;
@@ -189,9 +196,9 @@
   /* Relates to the actual size of the box */
   width: 30%;
   height: 11%;
-  border: 2px solid black;
-  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
-  background-color: lightgray;
+  background-color: rgba(0, 0, 0, 0.38);
+  color: rgb(255, 255, 255);
+  box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
 
   /* Relates to the actual positioning of the box */
   position: absolute;

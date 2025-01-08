@@ -2,7 +2,7 @@ import './App.css';
 
 function App() {
   return (
-    <div>
+    <div> 
       <div className = "topNamePlate">
         <div>Planned Life TM</div>
         <button className="accountButton">User</button>
@@ -24,7 +24,7 @@ function App() {
       <div className = "daysGrid">7 x 5 Grid for Days</div>
       <div className = "today">Coming Up Today:</div>
       <div className = "tomorrow">Tomorrow: </div>
-      <div className = "otherUtilities">Other Utilities!:</div>
+      <div className = "otherUtilities">Other Utilities:</div>
 
       <div className = "filterBar">
         <div>Filters: </div>
