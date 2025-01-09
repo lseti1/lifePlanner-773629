@@ -135,7 +135,7 @@ body { /* This is for the background (under layer) */
   /* Relates to the actual text-positioning inside the box */
   display: grid;
   place-items: center;
-  grid-template-columns: repeat(7, auto);
+  grid-template-columns: repeat(7, 2fr);
   background-color: rgba(0, 0, 0, 0.50);
   color: rgb(255, 255, 255);
 
@@ -153,7 +153,6 @@ body { /* This is for the background (under layer) */
 .daysGrid {
   /* Relates to the actual text-positioning inside the box */
   display: grid;
-  place-items: center;
 
   /* Relates to the actual size of the box */
   width: 65%;
@@ -162,10 +161,30 @@ body { /* This is for the background (under layer) */
   color: rgb(255, 255, 255);
   box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
 
+  grid-template-columns: repeat(7, 2fr); /* 7 columns */
+  grid-template-rows: repeat(5, 2fr); /* 5 rows */
+
   /* Relates to the actual positioning of the box */
   position: absolute;
   top: 230px;
   right: 25px;
+}
+
+.daysGridArrays {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: rgba(0, 0, 0, 0.38);
+  padding: 10px;
+}
+
+.daysGridArrays:hover {
+  background-color: #f0f8ff71;
+  color: rgba(0, 0, 0, 0.473);
 }
 
 .today {

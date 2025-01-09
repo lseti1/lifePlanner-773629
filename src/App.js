@@ -1,6 +1,25 @@
+import React, { useState } from "react";
 import './App.css';
 
 function App() {
+
+  // Create a 7x5 grid by generating 35 items
+  const [gridItems, setGridItems] = useState(
+    Array(35).fill("").map((_, index) => ({ id: index, text: "" }))
+  );
+
+  // Handle editing a grid item
+  const handleEdit = (id) => {
+    const newText = prompt("Edit the text for this box:", gridItems[id].text);
+    if (newText !== null) {
+      setGridItems((prev) =>
+        prev.map((item) =>
+          item.id === id ? { ...item, text: newText } : item
+        )
+      );
+    }
+  };
+
   return (
     <div> 
       <div className = "topNamePlate">
@@ -21,7 +40,13 @@ function App() {
         <div>Saturday</div>
         <div>Sunday</div>
       </div>
-      <div className = "daysGrid">7 x 5 Grid for Days</div>
+      <div className = "daysGrid">
+        {gridItems.map((item) => (
+          <div key={item.id} className="daysGridArrays" onClick={() => handleEdit(item.id)}>
+            {item.text || item.id + 1}
+          </div>
+        ))}
+      </div>
       <div className = "today">Coming Up Today:</div>
       <div className = "tomorrow">Tomorrow: </div>
       <div className = "otherUtilities">Other Utilities:</div>
