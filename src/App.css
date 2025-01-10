@@ -78,6 +78,20 @@ body { /* This is for the background (under layer) */
   right: 30px;
 }
 
+.addButtons {
+  display: grid;
+  background-color: hsla(0, 0%, 100%, 0.274);
+  color: white;
+  border: 0px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Add smooth transitions */
+}
+
+.addButtons:hover {
+  background-color: rgb(58, 39, 226); /* Slightly visible background on hover */
+  color: white; /* Keep text white */
+}
+
 .filterButtons {
   display: grid;
   background-color: hsla(0, 0%, 100%, 0.274);
@@ -113,8 +127,10 @@ body { /* This is for the background (under layer) */
 
 .calendarTitle {
   /* Relates to the actual text-positioning inside the box */
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center; /* Vertically Align */
+  justify-content: center; /* Horizontally Align */
+  gap: 20px;
   font-size: 28px;
   font-weight: 500;
 
@@ -129,6 +145,21 @@ body { /* This is for the background (under layer) */
   position: absolute;
   top: 150px;
   right: 25px;
+}
+
+.calendarButton {
+  display: grid;
+  background-color: hsla(0, 0%, 100%, 0);
+  color: white;
+  border: 0px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Add smooth transitions */
+}
+
+.calendarButton:hover {
+  background-color: rgb(58, 39, 226); /* Slightly visible background on hover */
+  color: white; /* Keep text white */
 }
 
 .daysOfWeek {

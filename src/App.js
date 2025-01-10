@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import './App.css';
 
 function App() {
+  const months = ['January', 'Febuary', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'];
+
   // For the actual 35 grid of days of the week (creates a functional component using useState to have 
-  // an array of size 35, setting initial values to nothing and giving each an id and space for text)
+  // an array of size 35, setting initial values to nothing and giving each an id and space for text), grid items = current state of the grid, setGridItems is the function to override values
   const [gridItems, setGridItems] = useState(Array(35).fill("").map((_, index) => ({ id: index, text: "" })));
-
-  // grid items = current state of the grid, setGridItems is the function to override values
-  
-
-  // For having each grid box have it's own text
-  const handleEdit = (id) => 
+  const handleEdit = (id) => // For having each grid box have it's own text
     {
       const newText = prompt("Add your plan for this day: ", gridItems[id].text);
       if (newText !== null) 
@@ -25,6 +23,15 @@ function App() {
         }
     };
 
+    const [currentMonthIndex, setCurrentMonthIndex] = useState(0);
+    const changePrevMonth = () => {
+      setCurrentMonthIndex((prevIndex) => (prevIndex === 0 ? 11 : prevIndex - 1));
+    }
+    const changeNextMonth = () => {
+      setCurrentMonthIndex((prevIndex) => (prevIndex === 11 ? 0 : prevIndex + 1));
+    }
+
+
   return (
     <div> 
       <div className = "topNamePlate">
@@ -33,9 +40,13 @@ function App() {
       </div>
       <div className = "addBar">
         <input type ="search" className="searchBar" placeholder="Search for Plan:"></input>
-        <button className= "filterButtons">+ Add Plan</button>
+        <button className= "addButtons">+ Add Plan</button>
       </div>
-      <div className = "calendarTitle">Month: ???</div>
+      <div className = "calendarTitle">
+        <button className = "calendarButton" onClick = {changePrevMonth}>&lt;</button> {/* lt means less than symbol */}
+        {months[currentMonthIndex]}
+        <button className = "calendarButton" onClick = {changeNextMonth}>&gt;</button> {/* gt means greater than symbol */}
+      </div>
       <div className = "daysOfWeek">
         <div>Monday</div>
         <div>Tuesday</div>
