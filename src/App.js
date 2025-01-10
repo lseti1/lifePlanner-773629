@@ -2,28 +2,33 @@ import React, { useState } from "react";
 import './App.css';
 
 function App() {
+  // For the actual 35 grid of days of the week (creates a functional component using useState to have 
+  // an array of size 35, setting initial values to nothing and giving each an id and space for text)
+  const [gridItems, setGridItems] = useState(Array(35).fill("").map((_, index) => ({ id: index, text: "" })));
 
-  // Create a 7x5 grid by generating 35 items
-  const [gridItems, setGridItems] = useState(
-    Array(35).fill("").map((_, index) => ({ id: index, text: "" }))
-  );
+  // grid items = current state of the grid, setGridItems is the function to override values
+  
 
-  // Handle editing a grid item
-  const handleEdit = (id) => {
-    const newText = prompt("Edit the text for this box:", gridItems[id].text);
-    if (newText !== null) {
-      setGridItems((prev) =>
-        prev.map((item) =>
-          item.id === id ? { ...item, text: newText } : item
-        )
-      );
-    }
-  };
+  // For having each grid box have it's own text
+  const handleEdit = (id) => 
+    {
+      const newText = prompt("Add your plan for this day: ", gridItems[id].text);
+      if (newText !== null) 
+        {
+          setGridItems((prev) => 
+            {
+              const updatedGrid = prev.map((item) => item.id === id ? { ...item, text: newText } : item);
+              console.log("New Plan '%s' Added at index '%d'.", newText, id); // For Printing changes into the console 
+              console.log("Updated Grid Items:", updatedGrid); // Note that React runs code twice in development mode
+              return updatedGrid;
+            });
+        }
+    };
 
   return (
     <div> 
       <div className = "topNamePlate">
-        <div>Planned Life TM</div>
+        <div>Planned Life</div>
         <button className="accountButton">User</button>
       </div>
       <div className = "addBar">
