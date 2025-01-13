@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './App.css';
 
 function App() {
   const months = ['January', 'Febuary', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'];
+
+  const [currentMonthIndex, setCurrentMonthIndex] = useState(0);
+  const [gridItems, setGridItems] = useState([]);
+
 
   const getFirstDayOfMonth = (monthIndex) => {
     const year = 2025;
@@ -17,15 +21,6 @@ function App() {
     return daysInMonth;
   };
 
-  const [currentMonthIndex, setCurrentMonthIndex] = useState(0);
-  const changePrevMonth = () => {
-    setCurrentMonthIndex((prevIndex) => (prevIndex === 0 ? 11 : prevIndex - 1));
-    
-  }
-  const changeNextMonth = () => {
-    setCurrentMonthIndex((prevIndex) => (prevIndex === 11 ? 0 : prevIndex + 1));
-  }
-
   const firstDay = getFirstDayOfMonth(currentMonthIndex);
   console.log("First Day = ", firstDay);
   const daysInMonth = numberOfDaysInMonth(currentMonthIndex);
@@ -35,7 +30,32 @@ function App() {
 
   // For the actual 35 grid of days of the week (creates a functional component using useState to have 
   // an array of size 35, setting initial values to nothing and giving each an id and space for text), grid items = current state of the grid, setGridItems is the function to override values
-  const [gridItems, setGridItems] = useState(Array(35).fill("").map((_, index) => ({ id: index, text: index >= firstDay && index < finalDate ? "Valid Day" : "" })));
+  const calculateGridItems = (firstDay, finalDate) => {return Array(35).fill("").map((_, index) => ({ id: index, text: index >= firstDay && index < finalDate ? "Valid Day" : "" })); };
+
+  useEffect(() => {
+    const firstDay = getFirstDayOfMonth(currentMonthIndex);
+    const finalDate = getFirstDayOfMonth(currentMonthIndex) + numberOfDaysInMonth(currentMonthIndex);
+
+    const initialGridItems = calculateGridItems(firstDay, finalDate);
+    setGridItems(initialGridItems);
+  }, [currentMonthIndex]);
+
+  const changePrevMonth = () => {
+    setCurrentMonthIndex((prevIndex) => (prevIndex === 0 ? 11 : prevIndex - 1));
+  }
+  const changeNextMonth = () => {
+    setCurrentMonthIndex((prevIndex) => (prevIndex === 11 ? 0 : prevIndex + 1));
+  }
+
+  const handlePrevMonthClick = () => {
+    changePrevMonth();
+    setGridItems(calculateGridItems(firstDay, finalDate));
+  };
+  
+  const handleNextMonthClick = () => {
+    changeNextMonth();
+    setGridItems(calculateGridItems(firstDay, finalDate));
+  };
 
   const handleEdit = (id) => // For having each grid box have it's own text
     {
@@ -66,9 +86,9 @@ function App() {
         <button className= "addButtons">+ Add Plan</button>
       </div>
       <div className = "calendarTitle">
-        <button className = "calendarButton" onClick = {changePrevMonth} >&lt;</button> {/* lt means less than symbol */}
+        <button className = "calendarButton" onClick = {handlePrevMonthClick} >&lt;</button> {/* lt means less than symbol */}
         {months[currentMonthIndex]}
-        <button className = "calendarButton" onClick = {changeNextMonth}>&gt;</button> {/* gt means greater than symbol */}
+        <button className = "calendarButton" onClick = {handleNextMonthClick}>&gt;</button> {/* gt means greater than symbol */}
       </div>
       <div className = "daysOfWeek">
         <div>Monday</div>
