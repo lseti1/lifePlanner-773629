@@ -30,7 +30,7 @@ function App() {
 
   // For the actual 35 grid of days of the week (creates a functional component using useState to have 
   // an array of size 35, setting initial values to nothing and giving each an id and space for text), grid items = current state of the grid, setGridItems is the function to override values
-  const calculateGridItems = (firstDay, finalDate) => {return Array(35).fill("").map((_, index) => ({ id: index, text: index >= firstDay && index < finalDate ? "Valid Day" : "" })); };
+  const calculateGridItems = (firstDay, finalDate) => {return Array(35).fill("").map((_, index) => ({ id: index, text: index >= firstDay && index < finalDate ? (index-firstDay + 1).toString() : "" })); };
 
   useEffect(() => {
     const firstDay = getFirstDayOfMonth(currentMonthIndex);
@@ -38,7 +38,7 @@ function App() {
 
     const initialGridItems = calculateGridItems(firstDay, finalDate);
     setGridItems(initialGridItems);
-  }, [currentMonthIndex]);
+  }, [currentMonthIndex]); // These functions are called each time currentMonthIndex is changed basically
 
   const changePrevMonth = () => {
     setCurrentMonthIndex((prevIndex) => (prevIndex === 0 ? 11 : prevIndex - 1));
@@ -71,8 +71,6 @@ function App() {
             });
         }
     };
-
-    
 
 
   return (

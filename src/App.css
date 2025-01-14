@@ -203,14 +203,15 @@ body { /* This is for the background (under layer) */
 
 .daysGridArrays {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: right;
+  align-items: top;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  background-color: rgba(0, 0, 0, 0.38);
+  background-color: rgba(0, 0, 0, 0.50);
   padding: 10px;
+  border: 0.5px solid rgba(0, 0, 0, 0.25 );
 }
 
 .daysGridArrays:hover {
