@@ -187,8 +187,8 @@ body { /* This is for the background (under layer) */
 
   /* Relates to the actual size of the box */
   width: 65%;
-  height: 72.5%;
-  background-color: rgba(0, 0, 0, 0.38);
+  height: 675px;
+  background-color: rgba(0, 0, 0, 0.42);
   color: rgb(255, 255, 255);
   box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
 
@@ -209,7 +209,6 @@ body { /* This is for the background (under layer) */
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  background-color: rgba(0, 0, 0, 0.50);
   padding: 10px;
   border: 0.5px solid rgba(0, 0, 0, 0.25 );
 }
@@ -219,17 +218,20 @@ body { /* This is for the background (under layer) */
   color: rgba(0, 0, 0, 0.473);
 }
 
-.today {
+.todayTitle {
   /* Relates to the actual text-positioning inside the box */
   display: grid;
-  place-items: center;
+  text-align: left;
+  align-items: center;
+  text-indent: 20px;
+  font-size: 22px;
+  font-weight: 500;
 
   /* Relates to the actual size of the box */
   width: 30%;
-  height: 400px;
-  background-color: rgba(0, 0, 0, 0.38);
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.50);
   color: rgb(255, 255, 255);
-  box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
 
   /* Relates to the actual positioning of the box */
   position: absolute;
@@ -237,38 +239,61 @@ body { /* This is for the background (under layer) */
   left: 25px;
 }
 
-.tomorrow {
+
+.todayText {
   /* Relates to the actual text-positioning inside the box */
   display: grid;
   place-items: center;
 
   /* Relates to the actual size of the box */
   width: 30%;
-  height: 200px;
+  height: 350px;
   background-color: rgba(0, 0, 0, 0.38);
+  color: rgb(255, 255, 255);
+
+  /* Relates to the actual positioning of the box */
+  position: absolute;
+  top: 200px;
+  left: 25px;
+}
+
+.tomorrowTitle {
+  /* Relates to the actual text-positioning inside the box */
+  display: grid;
+  align-items: center;
+  text-align: left;
+  text-indent: 20px;
+  font-size: 22px;
+  font-weight: 500;
+
+
+  /* Relates to the actual size of the box */
+  width: 30%;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.50);
   color: rgb(255, 255, 255);
   box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
 
   /* Relates to the actual positioning of the box */
   position: absolute;
-  top: 575px;
+  top: 600px;
   left: 25px;
 }
 
-.otherUtilities {
-    /* Relates to the actual text-positioning inside the box */
+.tomorrowText {
+  /* Relates to the actual text-positioning inside the box */
   display: grid;
   place-items: center;
 
   /* Relates to the actual size of the box */
   width: 30%;
-  height: 11%;
+  height: 255px;
   background-color: rgba(0, 0, 0, 0.38);
   color: rgb(255, 255, 255);
   box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
 
   /* Relates to the actual positioning of the box */
   position: absolute;
-  top: 800px;
+  top: 650px;
   left: 25px;
 }

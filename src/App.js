@@ -104,9 +104,10 @@ function App() {
           </div>
         ))}
       </div>
-      <div className = "today">Coming Up Today:</div>
-      <div className = "tomorrow">Tomorrow: </div>
-      <div className = "otherUtilities">Other Utilities:</div>
+      <div className = "todayTitle">Today's Plans:</div>
+      <div className = "todayText">Today's Plans Here</div>
+      <div className = "tomorrowTitle">Tomorrow's Plans:</div>
+      <div className = "tomorrowText">Tomorrow's Plans Here</div>
 
       <div className = "filterBar">
         <div>Filters: </div>
