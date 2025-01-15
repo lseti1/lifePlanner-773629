@@ -102,7 +102,7 @@ body { /* This is for the background (under layer) */
 }
 
 .filterButtons:hover {
-  background-color: rgb(58, 39, 226); /* Slightly visible background on hover */
+  background-color: rgba(58, 39, 226); /* Slightly visible background on hover */
   color: white; /* Keep text white */
 }
 
@@ -158,7 +158,7 @@ body { /* This is for the background (under layer) */
 }
 
 .calendarButton:hover {
-  background-color: rgb(58, 39, 226); /* Slightly visible background on hover */
+  background-color: rgba(58, 39, 226); /* Slightly visible background on hover */
   color: white; /* Keep text white */
 }
 
@@ -199,6 +199,10 @@ body { /* This is for the background (under layer) */
   position: absolute;
   top: 230px;
   right: 25px;
+}
+
+.highlight {
+  background-color: rgba(51, 51, 51, 0.507);
 }
 
 .daysGridArrays {

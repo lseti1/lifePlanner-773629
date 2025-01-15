@@ -5,9 +5,19 @@ function App() {
   const months = ['January', 'Febuary', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'];
 
+  const currentDate = new Date();
+  const currentDay = currentDate.getDate();
+  const currentMonth  = currentDate.getMonth();
+  const nextDate = new Date();
+
+
+  nextDate.setDate(currentDate.getDate() + 1);  
+  const formatDate = (date) => {
+    return date.toLocaleDateString('en-GB');
+  }
+
   const [currentMonthIndex, setCurrentMonthIndex] = useState(0);
   const [gridItems, setGridItems] = useState([]);
-
 
   const getFirstDayOfMonth = (monthIndex) => {
     const year = 2025;
@@ -22,11 +32,7 @@ function App() {
   };
 
   const firstDay = getFirstDayOfMonth(currentMonthIndex);
-  console.log("First Day = ", firstDay);
-  const daysInMonth = numberOfDaysInMonth(currentMonthIndex);
-  console.log("Days In Month = ", daysInMonth);
   const finalDate = getFirstDayOfMonth(currentMonthIndex) + numberOfDaysInMonth(currentMonthIndex);
-  console.log("Final Date = ", finalDate)
 
   // For the actual 35 grid of days of the week (creates a functional component using useState to have 
   // an array of size 35, setting initial values to nothing and giving each an id and space for text), grid items = current state of the grid, setGridItems is the function to override values
@@ -76,7 +82,7 @@ function App() {
   return (
     <div> 
       <div className = "topNamePlate">
-        <div>Planned Life</div>
+        <div>LifePlanner</div>
         <button className="accountButton">User</button>
       </div>
       <div className = "addBar">
@@ -99,14 +105,18 @@ function App() {
       </div>
       <div className = "daysGrid">
         {gridItems.map((item) => (
-          <div key={item.id} className="daysGridArrays" onClick={() => handleEdit(item.id)}>
+          <div 
+            key={item.id} 
+            className={`daysGridArrays ${item.id === currentDay + firstDay - 1 && currentMonth === currentMonthIndex ? "highlight" : ""}`}
+            onClick={() => handleEdit(item.id)}
+          >
             {item.text}
           </div>
         ))}
       </div>
-      <div className = "todayTitle">Today's Plans:</div>
+      <div className = "todayTitle">Today's Plans ({formatDate(currentDate)}):</div>
       <div className = "todayText">Today's Plans Here</div>
-      <div className = "tomorrowTitle">Tomorrow's Plans:</div>
+      <div className = "tomorrowTitle">Tomorrow's Plans ({formatDate(nextDate)}):</div>
       <div className = "tomorrowText">Tomorrow's Plans Here</div>
 
       <div className = "filterBar">
