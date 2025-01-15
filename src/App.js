@@ -63,8 +63,8 @@ function App() {
     setGridItems(calculateGridItems(firstDay, finalDate));
   };
 
-  const handleEdit = (id) => // For having each grid box have it's own text
-    {
+  const handleEdit = (id) => { // For having each grid box have it's own text
+    if (id >= firstDay && id < finalDate) { // Adjusted to prevent text to be added to invalid dates (e.g. next month or prev month)
       const newText = prompt("Add your plan for this day: ", gridItems[id].text);
       if (newText !== null) 
         {
@@ -76,7 +76,8 @@ function App() {
               return updatedGrid;
             });
         }
-    };
+    }
+  };
 
 
   return (
@@ -85,9 +86,8 @@ function App() {
         <div>LifePlanner</div>
         <button className="accountButton">User</button>
       </div>
-      <div className = "addBar">
-        <input type ="search" className="searchBar" placeholder="Search for Plan:"></input>
-        <button className= "addButtons">+ Add Plan</button>
+      <div className = "search">
+        <input type ="search" className="searchBar" placeholder="Search for Plan... "></input>
       </div>
       <div className = "calendarTitle">
         <button className = "calendarButton" onClick = {handlePrevMonthClick} >&lt;</button> {/* lt means less than symbol */}
@@ -107,7 +107,10 @@ function App() {
         {gridItems.map((item) => (
           <div 
             key={item.id} 
-            className={`daysGridArrays ${item.id === currentDay + firstDay - 1 && currentMonth === currentMonthIndex ? "highlight" : ""}`}
+            className={`daysGridArrays 
+              ${item.id === currentDay + firstDay - 1 && currentMonth === currentMonthIndex ? "highlight" : ""}
+              ${item.id < firstDay || item.id >= finalDate ? "no-hover" : ""}
+              `}
             onClick={() => handleEdit(item.id)}
           >
             {item.text}
@@ -118,14 +121,6 @@ function App() {
       <div className = "todayText">Today's Plans Here</div>
       <div className = "tomorrowTitle">Tomorrow's Plans ({formatDate(nextDate)}):</div>
       <div className = "tomorrowText">Tomorrow's Plans Here</div>
-
-      <div className = "filterBar">
-        <div>Filters: </div>
-        <button className= "filterButtons">Birthdays</button>
-        <button className= "filterButtons">Events</button>
-        <button className= "filterButtons">Reminders</button>
-        <button className= "filterButtons">Appointments</button>
-      </div>
       
     </div>
   );
