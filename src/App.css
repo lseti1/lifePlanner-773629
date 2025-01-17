@@ -222,6 +222,10 @@ body { /* This is for the background (under layer) */
   pointer-events: none; /* Disable hover interaction */
 }
 
+.past-day {
+  color: transparent;
+}
+
 .todayTitle {
   /* Relates to the actual text-positioning inside the box */
   display: grid;
@@ -247,7 +251,8 @@ body { /* This is for the background (under layer) */
 .todayText {
   /* Relates to the actual text-positioning inside the box */
   display: grid;
-  place-items: center;
+  text-align: left;
+  text-indent: 20px;
 
   /* Relates to the actual size of the box */
   width: 30%;
@@ -287,7 +292,8 @@ body { /* This is for the background (under layer) */
 .tomorrowText {
   /* Relates to the actual text-positioning inside the box */
   display: grid;
-  place-items: center;
+  text-align: left;
+  text-indent: 20px;
 
   /* Relates to the actual size of the box */
   width: 30%;

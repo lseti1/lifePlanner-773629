@@ -109,7 +109,8 @@ function App() {
             key={item.id} 
             className={`daysGridArrays 
               ${item.id === currentDay + firstDay - 1 && currentMonth === currentMonthIndex ? "highlight" : ""}
-              ${item.id < firstDay || item.id >= finalDate ? "no-hover" : ""}
+              ${item.id < firstDay || item.id >= finalDate || (item.id <= currentDay && currentMonthIndex <= currentMonth) ? "no-hover" : ""}
+              ${item.id <= currentDay && currentMonthIndex <= currentMonth ? "past-day" : ""}
               `}
             onClick={() => handleEdit(item.id)}
           >
@@ -119,10 +120,22 @@ function App() {
           </div>
         ))}
       </div>
-      <div className = "todayTitle">Today's Plans ({formatDate(currentDate)}):</div>
-      <div className = "todayText">Today's Plans Here</div>
-      <div className = "tomorrowTitle">Tomorrow's Plans ({formatDate(nextDate)}):</div>
-      <div className = "tomorrowText">Tomorrow's Plans Here</div>
+      <div className = "todayTitle">Today's Plans:</div>
+      <div className="todayText">
+        {gridItems.find(item => item.id === currentDay + firstDay - 1)?.text && (
+          <div>
+            {gridItems.find(item => item.id === currentDay + firstDay - 1).text}
+          </div>
+        )}
+      </div>
+      <div className = "tomorrowTitle">Tomorrow's Plans:</div>
+      <div className="tomorrowText">
+        {gridItems.find(item => item.id === currentDay + firstDay)?.text && (
+          <div>
+            {gridItems.find(item => item.id === currentDay + firstDay).text}
+          </div>
+        )}
+      </div>
       
     </div>
   );
