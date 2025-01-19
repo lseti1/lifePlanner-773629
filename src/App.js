@@ -10,14 +10,11 @@ function App() {
   const currentMonth  = currentDate.getMonth();
   const nextDate = new Date();
 
-
   nextDate.setDate(currentDate.getDate() + 1);  
-  const formatDate = (date) => {
-    return date.toLocaleDateString('en-GB');
-  }
 
   const [currentMonthIndex, setCurrentMonthIndex] = useState(0);
   const [gridItems, setGridItems] = useState([]);
+  const [plans, setPlans] = useState([]);
 
   const getFirstDayOfMonth = (monthIndex) => {
     const year = 2025;
@@ -36,13 +33,30 @@ function App() {
 
   // For the actual 35 grid of days of the week (creates a functional component using useState to have 
   // an array of size 35, setting initial values to nothing and giving each an id and space for text), grid items = current state of the grid, setGridItems is the function to override values
-  const calculateGridItems = (firstDay, finalDate) => {return Array(35).fill("").map((_, index) => ({ id: index, text: " " })); };
+  const calculateGridItems = (firstDay, finalDate, currentMonthIndex) => {
+    const gridItems = Array(35).fill("").map((_, index) => ({ id: index, text: " " })); 
+    
+    for (let i = 0; i < sessionStorage.length; i++) { // This section relates to going through each of the saved plans and ensuring that they're put into the right date into calendar after refreshses
+      const key = sessionStorage.key(i);
+      if (key.startsWith(`plan_${currentMonthIndex}_`)) {
+        const savedPlan = JSON.parse(sessionStorage.getItem(key));
+  
+        // 
+        const gridItem = gridItems.find((item) => item.id === savedPlan.index);
+        if (gridItem) {
+          gridItem.text = savedPlan.plan; 
+        }
+      }
+    }
+
+    return gridItems; // Return the updated grid items
+  };
 
   useEffect(() => {
     const firstDay = getFirstDayOfMonth(currentMonthIndex);
     const finalDate = getFirstDayOfMonth(currentMonthIndex) + numberOfDaysInMonth(currentMonthIndex);
 
-    const initialGridItems = calculateGridItems(firstDay, finalDate);
+    const initialGridItems = calculateGridItems(firstDay, finalDate, currentMonthIndex);
     setGridItems(initialGridItems);
   }, [currentMonthIndex]); // These functions are called each time currentMonthIndex is changed basically
 
@@ -63,6 +77,33 @@ function App() {
     setGridItems(calculateGridItems(firstDay, finalDate));
   };
 
+  const savePlan = (plan, index, month) => {
+    const planData = { plan, index, month };
+    const key = `plan_${month}_${index}`;
+    sessionStorage.setItem(key, JSON.stringify(planData));
+  };
+
+  const getPlan = (index, month) => {
+    const key = `plan_${month}_${index}`;
+    const storedPlan = sessionStorage.getItem(key);
+    return storedPlan ? JSON.parse(storedPlan) : null;
+  };
+
+  const seePlans = () => { // Purely For Testing Purposes
+    const allPlans = []; 
+    for (let i = 0; i < sessionStorage.length; i++) {
+      const key = sessionStorage.key(i); 
+      if (key.startsWith("plan_")) {     
+        const plan = JSON.parse(sessionStorage.getItem(key)); 
+        allPlans.push(plan);             
+      }
+    }
+    return allPlans; 
+  }
+
+  const TodaysPlan = getPlan(currentDay + firstDay - 1, currentMonth);
+  const TomorrowsPlan = getPlan(currentDay + firstDay, currentMonth);
+
   const handleEdit = (id) => { // For having each grid box have it's own text
     if (id >= firstDay && id < finalDate) { // Adjusted to prevent text to be added to invalid dates (e.g. next month or prev month)
       const newText = prompt("Add your plan for this day: ", gridItems[id].text);
@@ -71,8 +112,16 @@ function App() {
           setGridItems((prev) => 
             {
               const updatedGrid = prev.map((item) => item.id === id ? { ...item, text: newText } : item);
-              console.log("New Plan '%s' Added at index '%d'.", newText, id); // For Printing changes into the console 
+              savePlan(newText, id, currentMonthIndex);
+              const planForToday = getPlan(id, currentMonthIndex);
+              
+              console.log("New Plan '%s' Added at index '%d' of month '%d", newText, id, currentMonthIndex); // For Printing changes into the console 
               console.log("Updated Grid Items:", updatedGrid); // Note that React runs code twice in development mode
+              console.log("Today's Plan: ", planForToday);
+
+              const storedPlans = seePlans();
+              console.log("All Stored Plans: ", storedPlans);
+
               return updatedGrid;
             });
         }
@@ -122,19 +171,13 @@ function App() {
       </div>
       <div className = "todayTitle">Today's Plans:</div>
       <div className="todayText">
-        {gridItems.find(item => item.id === currentDay + firstDay - 1)?.text && (
           <div>
-            {gridItems.find(item => item.id === currentDay + firstDay - 1).text}
+          {TodaysPlan ? TodaysPlan.plan : "No Plans for Today."}
           </div>
-        )}
       </div>
       <div className = "tomorrowTitle">Tomorrow's Plans:</div>
       <div className="tomorrowText">
-        {gridItems.find(item => item.id === currentDay + firstDay)?.text && (
-          <div>
-            {gridItems.find(item => item.id === currentDay + firstDay).text}
-          </div>
-        )}
+        {TomorrowsPlan ? TomorrowsPlan.plan : "No Plans for Tomorrow."}
       </div>
       
     </div>
