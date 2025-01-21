@@ -114,6 +114,32 @@ body { /* This is for the background (under layer) */
   left: 25px;
 }
 
+.results {
+  border-radius: 4px;
+  background-color: #ffffff;
+  z-index: 1000;
+
+  width: 25%;
+
+  position: absolute;
+  top: 144px;
+  left: 25px;
+}
+
+.result-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.no-results {
+  padding: 10px;
+  color: #999;
+}
+
 .calendarTitle {
   /* Relates to the actual text-positioning inside the box */
   display: flex;

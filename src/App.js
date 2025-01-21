@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import './App.css';
 
 function App() {
@@ -89,7 +89,12 @@ function App() {
     return storedPlan ? JSON.parse(storedPlan) : null;
   };
 
-  const seePlans = () => { // Purely For Testing Purposes
+  const [search, setSearch] = useState(""); // this is for the search bar itself
+  const [results, setResults] = useState([]); // this is for the results from the search
+  const [isVisible, setIsVisible] = useState(false); // For added functionality of minimising the serach results when clicked off
+  const searchRef = useRef(null); 
+
+  const seePlans = () => { // Purely For Testing Purposes (also now being used to for search function)
     const allPlans = []; 
     for (let i = 0; i < sessionStorage.length; i++) {
       const key = sessionStorage.key(i); 
@@ -101,16 +106,45 @@ function App() {
     return allPlans; 
   }
 
+  const searchPlans = (search) => { // Just to have all the plans together in one place and for searches to ignore casing
+    const allPlans = seePlans();
+    return allPlans.filter((plan) => 
+      plan.plan.toLowerCase().includes(search.toLowerCase())
+    );
+  };
+
+  useEffect(() => {
+    if (search) {
+      const filteredResults = searchPlans(search);
+      setResults(filteredResults);
+      setIsVisible(true); // Shows results when there's input
+    } 
+    else {
+      setResults ([]);
+    }
+  }, [search]);
+
+  const handleMinimising = (event) => {
+    if (searchRef.current && !searchRef.current.contains(event.target)) {
+      setIsVisible(false); // Hides results when clicking outside
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleMinimising);
+    return () => {
+      document.removeEventListener("mousedown", handleMinimising);
+    };
+  }, []);
+
   const TodaysPlan = getPlan(currentDay + firstDay - 1, currentMonth);
   const TomorrowsPlan = getPlan(currentDay + firstDay, currentMonth);
 
   const handleEdit = (id) => { // For having each grid box have it's own text
     if (id >= firstDay && id < finalDate) { // Adjusted to prevent text to be added to invalid dates (e.g. next month or prev month)
       const newText = prompt("Add your plan for this day: ", gridItems[id].text);
-      if (newText !== null) 
-        {
-          setGridItems((prev) => 
-            {
+      if (newText !== null) {
+          setGridItems((prev) => {
               const updatedGrid = prev.map((item) => item.id === id ? { ...item, text: newText } : item);
               savePlan(newText, id, currentMonthIndex);
               const planForToday = getPlan(id, currentMonthIndex);
@@ -135,8 +169,18 @@ function App() {
         <div>LifePlanner</div>
         <button className="accountButton">User</button>
       </div>
-      <div className = "search">
-        <input type ="search" className="searchBar" placeholder="Search for Plan... "></input>
+      <div className = "search" ref = {searchRef}>
+        <input type ="search" className="searchBar" placeholder="Search for Plan... " value = {search} onChange = {(e) => setSearch(e.target.value)} onFocus={() => setIsVisible(true)}></input>
+        {isVisible && (
+        <div className = "results">
+          {results.length > 0 ? (results.map((results, index) => (
+            <div className="result-item" key = {index}>
+              {results.plan} ({months[results.month]} {results.index})
+            </div>
+          ))
+        ) : search ? (<div className = "no-result">No plans found.</div> ) : null}
+        </div>
+        )}
       </div>
       <div className = "calendarTitle">
         <button className = "calendarButton" onClick = {handlePrevMonthClick} >&lt;</button> {/* lt means less than symbol */}
