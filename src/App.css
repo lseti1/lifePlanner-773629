@@ -1,22 +1,20 @@
-/* This adds the comment block to write text inside */
-
 .App {
   text-align: center;
   background-color: black;
 }
 
 body { /* This is for the background (under layer) */
-  background-image: url('/public/backgroundImage.jpg'); /* Path to your image */
-  background-size: cover; /* Ensures the image fills the screen */
-  background-repeat: no-repeat; /* Prevents repetition */
+  background-image: url('/public/backgroundImage.jpg'); 
+  background-size: cover; 
+  background-repeat: no-repeat; 
 }
 
 .topNamePlate {
   /* Relates to the actual text-positioning inside the box */
-  display: grid; /* need both display and place-items to be set to these for text to align in the very centre */
-  grid-template-columns: 1fr auto; /* Title takes remaining space, button takes as much as needed */
-  align-items: center; /* align-items centers stuff vertically, place-items does it both vertically and horizontally */
-  padding-left: 40px; /* Add space on the left side of the text */
+  display: grid; 
+  grid-template-columns: 1fr auto; 
+  align-items: center; 
+  padding-left: 40px; 
   font-size: 32px;
   font-weight: 700;
   background-color: rgba(0, 0, 0, 0.50);
@@ -25,54 +23,53 @@ body { /* This is for the background (under layer) */
   /* Relates to the actual size of the box */
   width: 100%;
   height: 70px;
-  /* border: 1px solid rgb(0, 0, 0); */
-  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
+  box-sizing: border-box;  /* Moves the border to inside the shape, not outside so sizing is right */
 
   /* Relates to the actual positioning of the box */
-  position: absolute; /* This is the type of positioning mode, where absolute means you set it exactly */
+  position: absolute; 
   top: 0px;
-  left: 0px; /* -2 here since the border is 2px and the width goes all the way across using 100% */
+  left: 0px; 
   
 }
 
 .accountButton {
-  width: 50px; /* Same width and height for a perfect circle */
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  font-size: 16px; 
+
+  width: 50px; 
   height: 50px;
-  border-radius: 50%; /* Makes the button circular */
+
+  border-radius: 50%; 
   background-color: rgba(0, 0, 0, 0.38);
   color: rgb(255, 255, 255);
-  cursor: pointer; /* Adds pointer cursor for hover */
-  display: flex; /* Flexbox to center content inside the circle */
-  justify-content: center; /* Centers content horizontally */
-  align-items: center; /* Centers content vertically */
-  font-size: 16px; /* Adjust font size for readability */ 
-  transition: background-color 0.3s, color 0.3s; /* Add smooth transitions */
+
+  cursor: pointer; 
+  transition: background-color 0.3s, color 0.3s; 
 
   position: absolute;
   right: 32px;
 }
 
 .accountButton:hover {
-  background-color: rgb(58, 39, 226); /* Slightly visible background on hover */
-  color: white; /* Keep text white */
+  background-color: rgb(58, 39, 226); 
+  color: white; 
 }
 
 .filterBar {
-  /* Relates to the actual text-positioning inside the box */
   display: grid;
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
-  grid-template-columns: 50px 1fr 1fr 1fr 1fr; /* This sets the first column as 40px, then 1fr for the rest of the columns */
-  gap: 10px; /*  If you want spacing between the buttons */
+  grid-template-columns: 50px 1fr 1fr 1fr 1fr; 
+  gap: 10px; 
   color: white;
 
-  /* Relates to the actual size of the box */
   width: 21%;
   height: 40px;
-  box-sizing: border-box; /* Moves the b order to inside the shape, not outside so sizing is right */
+  box-sizing: border-box; 
 
-  /* Relates to the actual positioning of the box */
   position:absolute;
   top: 155px;
   right: 30px;
@@ -83,17 +80,17 @@ body { /* This is for the background (under layer) */
   background-color: hsla(0, 0%, 100%, 0.274);
   color: white;
   border: 0px;
+
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* Add smooth transitions */
+  transition: background-color 0.3s, color 0.3s; 
 }
 
 .addButtons:hover {
-  background-color: rgb(58, 39, 226); /* Slightly visible background on hover */
-  color: white; /* Keep text white */
+  background-color: rgb(58, 39, 226); 
+  color: white; 
 }
 
 .searchBar {
-  /* Relates to the actual text-positioning inside the box */
   display: grid;
   place-items: center;
   font-size: 20px;
@@ -102,13 +99,11 @@ body { /* This is for the background (under layer) */
   background-color: rgba(0, 0, 0, 0.50);
   color: rgb(255, 255, 255);
 
-  /* Relates to the actual size of the box */
   width: 25%;
   height: 40px;
-  box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
+  box-sizing: border-box; 
   border: 0px;
 
-  /* Relates to the actual positioning of the box */
   position: absolute;
   top: 104px;
   left: 25px;
@@ -141,22 +136,19 @@ body { /* This is for the background (under layer) */
 }
 
 .calendarTitle {
-  /* Relates to the actual text-positioning inside the box */
   display: flex;
-  align-items: center; /* Vertically Align */
-  justify-content: center; /* Horizontally Align */
+  align-items: center;
+  justify-content: center; 
   gap: 20px;
   font-size: 28px;
   font-weight: 500;
 
-  /* Relates to the actual size of the box */
   width: 65%;
   height: 50px;
-  box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
+  box-sizing: border-box; 
   background-color: rgba(0, 0, 0, 0.50);
   color: rgb(255, 255, 255);
 
-  /* Relates to the actual positioning of the box */
   position: absolute;
   top: 150px;
   right: 25px;
@@ -169,55 +161,49 @@ body { /* This is for the background (under layer) */
   border: 0px;
   font-size: 20px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* Add smooth transitions */
+  transition: background-color 0.3s, color 0.3s; 
 }
 
 .calendarButton:hover {
-  background-color: rgba(58, 39, 226); /* Slightly visible background on hover */
-  color: white; /* Keep text white */
+  background-color: rgba(58, 39, 226); 
+  color: white; 
 }
 
 .daysOfWeek {
-  /* Relates to the actual text-positioning inside the box */
   display: grid;
   place-items: center;
   grid-template-columns: repeat(7, 2fr);
   background-color: rgba(0, 0, 0, 0.50);
   color: rgb(255, 255, 255);
 
-  /* Relates to the actual size of the box */
   width: 65%;
   height: 30px;
-  box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
+  box-sizing: border-box; 
 
-  /* Relates to the actual positioning of the box */
   position: absolute;
   top: 200px;
   right: 25px;
 }
 
 .daysGrid {
-  /* Relates to the actual text-positioning inside the box */
   display: grid;
 
-  /* Relates to the actual size of the box */
   width: 65%;
   height: 675px;
   background-color: rgba(0, 0, 0, 0.42);
   color: rgb(255, 255, 255);
-  box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
+  box-sizing: border-box; 
 
-  grid-template-columns: repeat(7, 2fr); /* 7 columns */
-  grid-template-rows: repeat(5, 2fr); /* 5 rows */
+  grid-template-columns: repeat(7, 2fr); 
+  grid-template-rows: repeat(5, 2fr); 
 
-  /* Relates to the actual positioning of the box */
   position: absolute;
   top: 230px;
   right: 25px;
 }
 
 .highlight {
-  background-color: rgba(51, 51, 51, 0.7);
+  background-color: rgba(219, 208, 208, 0.336);
 }
 
 .daysGridArrays {
@@ -227,7 +213,6 @@ body { /* This is for the background (under layer) */
   font-size: 16px;
   font-weight: bold;
 
-  /* These are the adjustments for preventing text expanding size of boxes and specifying the behaviour of large texts inside each box */
   overflow-y: auto;
   overflow-x: hidden;
   white-space: normal;
@@ -245,7 +230,7 @@ body { /* This is for the background (under layer) */
 }
 
 .no-hover:hover {
-  pointer-events: none; /* Disable hover interaction */
+  pointer-events: none; /* To Disable hover thing */
 }
 
 .past-day {
@@ -253,7 +238,6 @@ body { /* This is for the background (under layer) */
 }
 
 .todayTitle {
-  /* Relates to the actual text-positioning inside the box */
   display: grid;
   text-align: left;
   align-items: center;
@@ -261,13 +245,11 @@ body { /* This is for the background (under layer) */
   font-size: 22px;
   font-weight: 500;
 
-  /* Relates to the actual size of the box */
   width: 30%;
   height: 50px;
   background-color: rgba(0, 0, 0, 0.50);
   color: rgb(255, 255, 255);
 
-  /* Relates to the actual positioning of the box */
   position: absolute;
   top: 150px;
   left: 25px;
@@ -275,25 +257,21 @@ body { /* This is for the background (under layer) */
 
 
 .todayText {
-  /* Relates to the actual text-positioning inside the box */
   display: grid;
   text-align: left;
   text-indent: 20px;
 
-  /* Relates to the actual size of the box */
   width: 30%;
   height: 350px;
   background-color: rgba(0, 0, 0, 0.38);
   color: rgb(255, 255, 255);
 
-  /* Relates to the actual positioning of the box */
   position: absolute;
   top: 200px;
   left: 25px;
 }
 
 .tomorrowTitle {
-  /* Relates to the actual text-positioning inside the box */
   display: grid;
   align-items: center;
   text-align: left;
@@ -301,34 +279,28 @@ body { /* This is for the background (under layer) */
   font-size: 22px;
   font-weight: 500;
 
-
-  /* Relates to the actual size of the box */
   width: 30%;
   height: 50px;
   background-color: rgba(0, 0, 0, 0.50);
   color: rgb(255, 255, 255);
-  box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
+  box-sizing: border-box; 
 
-  /* Relates to the actual positioning of the box */
   position: absolute;
   top: 600px;
   left: 25px;
 }
 
 .tomorrowText {
-  /* Relates to the actual text-positioning inside the box */
   display: grid;
   text-align: left;
   text-indent: 20px;
 
-  /* Relates to the actual size of the box */
   width: 30%;
   height: 255px;
   background-color: rgba(0, 0, 0, 0.38);
   color: rgb(255, 255, 255);
-  box-sizing: border-box; /* Moves the border to inside the shape, not outside so sizing is right */
+  box-sizing: border-box; 
 
-  /* Relates to the actual positioning of the box */
   position: absolute;
   top: 650px;
   left: 25px;

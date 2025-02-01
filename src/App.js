@@ -12,7 +12,7 @@ function App() {
 
   nextDate.setDate(currentDate.getDate() + 1);  
 
-  const [currentMonthIndex, setCurrentMonthIndex] = useState(0);
+  const [currentMonthIndex, setCurrentMonthIndex] = useState(currentMonth);
   const [gridItems, setGridItems] = useState([]);
   const [plans, setPlans] = useState([]);
 
@@ -177,10 +177,8 @@ function App() {
             <div className="result-item" key = {index}>
               {results.plan} ({months[results.month]} {results.index})
             </div>
-          ))
-        ) : search ? (<div className = "no-result">No plans found.</div> ) : null}
-        </div>
-        )}
+          ))) : search ? (<div className = "no-result">No plans found.</div> ) : null}
+        </div> )}
       </div>
       <div className = "calendarTitle">
         <button className = "calendarButton" onClick = {handlePrevMonthClick} >&lt;</button> {/* lt means less than symbol */}
@@ -205,25 +203,19 @@ function App() {
               ${item.id < firstDay || item.id >= finalDate || (item.id <= currentDay && currentMonthIndex <= currentMonth) ? "no-hover" : ""}
               ${item.id <= currentDay && currentMonthIndex <= currentMonth ? "past-day" : ""}
               `}
-            onClick={() => handleEdit(item.id)}
-          >
+            onClick={() => handleEdit(item.id)} >
             {item.id >= firstDay && item.id < finalDate && <div className="daysGridDates">{item.id - firstDay + 1}. </div>} {/* This is so that the date doesn't move off */}
-            
             {item.text}
-          </div>
-        ))}
+          </div> ))}
       </div>
       <div className = "todayTitle">Today's Plans:</div>
       <div className="todayText">
-          <div>
-          {TodaysPlan ? TodaysPlan.plan : "No Plans for Today."}
-          </div>
+          <div>{TodaysPlan ? TodaysPlan.plan : "No Plans for Today."}</div>
       </div>
       <div className = "tomorrowTitle">Tomorrow's Plans:</div>
       <div className="tomorrowText">
         {TomorrowsPlan ? TomorrowsPlan.plan : "No Plans for Tomorrow."}
       </div>
-      
     </div>
   );
 }
