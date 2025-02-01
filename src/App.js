@@ -9,12 +9,16 @@ function App() {
   const currentDay = currentDate.getDate();
   const currentMonth  = currentDate.getMonth();
   const nextDate = new Date();
-
   nextDate.setDate(currentDate.getDate() + 1);  
-
   const [currentMonthIndex, setCurrentMonthIndex] = useState(currentMonth);
   const [gridItems, setGridItems] = useState([]);
   const [plans, setPlans] = useState([]);
+
+  // These are related to Search Bar and the Results
+  const [search, setSearch] = useState(""); 
+  const [results, setResults] = useState([]); 
+  const [isVisible, setIsVisible] = useState(false); 
+  const searchRef = useRef(null); 
 
   const getFirstDayOfMonth = (monthIndex) => {
     const year = 2025;
@@ -31,25 +35,22 @@ function App() {
   const firstDay = getFirstDayOfMonth(currentMonthIndex);
   const finalDate = getFirstDayOfMonth(currentMonthIndex) + numberOfDaysInMonth(currentMonthIndex);
 
-  // For the actual 35 grid of days of the week (creates a functional component using useState to have 
-  // an array of size 35, setting initial values to nothing and giving each an id and space for text), grid items = current state of the grid, setGridItems is the function to override values
+  // To Set up the grid of an array of 35, initialising each to nothing and setting id up for each array with empty text for now
   const calculateGridItems = (firstDay, finalDate, currentMonthIndex) => {
     const gridItems = Array(35).fill("").map((_, index) => ({ id: index, text: " " })); 
     
-    for (let i = 0; i < sessionStorage.length; i++) { // This section relates to going through each of the saved plans and ensuring that they're put into the right date into calendar after refreshses
+    // To ensure that plans are still linked to their correct dates even after refreshes
+    for (let i = 0; i < sessionStorage.length; i++) { 
       const key = sessionStorage.key(i);
       if (key.startsWith(`plan_${currentMonthIndex}_`)) {
         const savedPlan = JSON.parse(sessionStorage.getItem(key));
-  
-        // 
         const gridItem = gridItems.find((item) => item.id === savedPlan.index);
         if (gridItem) {
           gridItem.text = savedPlan.plan; 
         }
       }
     }
-
-    return gridItems; // Return the updated grid items
+    return gridItems; 
   };
 
   useEffect(() => {
@@ -58,7 +59,7 @@ function App() {
 
     const initialGridItems = calculateGridItems(firstDay, finalDate, currentMonthIndex);
     setGridItems(initialGridItems);
-  }, [currentMonthIndex]); // These functions are called each time currentMonthIndex is changed basically
+  }, [currentMonthIndex]); // To get called each time currentMonthIndex is changed
 
   const changePrevMonth = () => {
     setCurrentMonthIndex((prevIndex) => (prevIndex === 0 ? 11 : prevIndex - 1));
@@ -89,12 +90,9 @@ function App() {
     return storedPlan ? JSON.parse(storedPlan) : null;
   };
 
-  const [search, setSearch] = useState(""); // this is for the search bar itself
-  const [results, setResults] = useState([]); // this is for the results from the search
-  const [isVisible, setIsVisible] = useState(false); // For added functionality of minimising the serach results when clicked off
-  const searchRef = useRef(null); 
-
-  const seePlans = () => { // Purely For Testing Purposes (also now being used to for search function)
+  
+  // To allow search function for any plans
+  const seePlans = () => { 
     const allPlans = []; 
     for (let i = 0; i < sessionStorage.length; i++) {
       const key = sessionStorage.key(i); 
@@ -106,27 +104,30 @@ function App() {
     return allPlans; 
   }
 
-  const searchPlans = (search) => { // Just to have all the plans together in one place and for searches to ignore casing
+  // To have all the plans in one place and casing to be ignored when searching
+  const searchPlans = (search) => { 
     const allPlans = seePlans();
     return allPlans.filter((plan) => 
       plan.plan.toLowerCase().includes(search.toLowerCase())
     );
   };
 
+  // To show results on search bar if active
   useEffect(() => {
     if (search) {
       const filteredResults = searchPlans(search);
       setResults(filteredResults);
-      setIsVisible(true); // Shows results when there's input
+      setIsVisible(true); 
     } 
     else {
       setResults ([]);
     }
   }, [search]);
 
+  // To hide results when search bar is clicked off
   const handleMinimising = (event) => {
     if (searchRef.current && !searchRef.current.contains(event.target)) {
-      setIsVisible(false); // Hides results when clicking outside
+      setIsVisible(false); 
     }
   };
 
@@ -140,8 +141,9 @@ function App() {
   const TodaysPlan = getPlan(currentDay + firstDay - 1, currentMonth);
   const TomorrowsPlan = getPlan(currentDay + firstDay, currentMonth);
 
-  const handleEdit = (id) => { // For having each grid box have it's own text
-    if (id >= firstDay && id < finalDate) { // Adjusted to prevent text to be added to invalid dates (e.g. next month or prev month)
+  // TO allow each date to have editable text
+  const handleEdit = (id) => { 
+    if (id >= firstDay && id < finalDate) { 
       const newText = prompt("Add your plan for this day: ", gridItems[id].text);
       if (newText !== null) {
           setGridItems((prev) => {
@@ -149,7 +151,7 @@ function App() {
               savePlan(newText, id, currentMonthIndex);
               const planForToday = getPlan(id, currentMonthIndex);
               
-              console.log("New Plan '%s' Added at index '%d' of month '%d", newText, id, currentMonthIndex); // For Printing changes into the console 
+              console.log("New Plan '%s' Added at index '%d' of month '%d", newText, id, currentMonthIndex); 
               console.log("Updated Grid Items:", updatedGrid); // Note that React runs code twice in development mode
               console.log("Today's Plan: ", planForToday);
 
@@ -175,7 +177,7 @@ function App() {
         <div className = "results">
           {results.length > 0 ? (results.map((results, index) => (
             <div className="result-item" key = {index}>
-              {results.plan} ({months[results.month]} {results.index})
+              {results.plan} ({months[results.month]} {results.index - firstDay + 1})
             </div>
           ))) : search ? (<div className = "no-result">No plans found.</div> ) : null}
         </div> )}
