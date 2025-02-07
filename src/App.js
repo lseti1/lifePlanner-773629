@@ -149,12 +149,12 @@ function App() {
           setGridItems((prev) => {
               const updatedGrid = prev.map((item) => item.id === id ? { ...item, text: newText } : item);
               savePlan(newText, id, currentMonthIndex);
+
               const planForToday = getPlan(id, currentMonthIndex);
-              
               console.log("New Plan '%s' Added at index '%d' of month '%d", newText, id, currentMonthIndex); 
               console.log("Updated Grid Items:", updatedGrid); // Note that React runs code twice in development mode
               console.log("Today's Plan: ", planForToday);
-
+              
               const storedPlans = seePlans();
               console.log("All Stored Plans: ", storedPlans);
 
@@ -203,7 +203,7 @@ function App() {
             className={`daysGridArrays 
               ${item.id === currentDay + firstDay - 1 && currentMonth === currentMonthIndex ? "highlight" : ""}
               ${item.id < firstDay || item.id >= finalDate || (item.id <= currentDay && currentMonthIndex <= currentMonth) ? "no-hover" : ""}
-              ${item.id <= currentDay && currentMonthIndex <= currentMonth ? "past-day" : ""}
+              ${item.id < currentDay + firstDay - 1 && currentMonthIndex === currentMonth ? "past-day" : ""}
               `}
             onClick={() => handleEdit(item.id)} >
             {item.id >= firstDay && item.id < finalDate && <div className="daysGridDates">{item.id - firstDay + 1}. </div>} {/* This is so that the date doesn't move off */}
