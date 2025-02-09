@@ -183,9 +183,9 @@ function App() {
         </div> )}
       </div>
       <div className = "calendarTitle">
-        <button className = "calendarButton" onClick = {handlePrevMonthClick} >&lt;</button> {/* lt means less than symbol */}
+        <button className = "calendarButton1" onClick = {handlePrevMonthClick} >&lt;</button> {/* lt means less than symbol */}
         {months[currentMonthIndex]}
-        <button className = "calendarButton" onClick = {handleNextMonthClick}>&gt;</button> {/* gt means greater than symbol */}
+        <button className = "calendarButton2" onClick = {handleNextMonthClick}>&gt;</button> {/* gt means greater than symbol */}
       </div>
       <div className = "daysOfWeek">
         <div>Monday</div>
