@@ -218,6 +218,7 @@ function App() {
       <div className="tomorrowText">
         {TomorrowsPlan ? TomorrowsPlan.plan : "No Plans for Tomorrow."}
       </div>
+      <div className = "disclaimer">(Best viewed in Full Screen)</div>
     </div>
   );
 }
