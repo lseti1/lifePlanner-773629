@@ -12,7 +12,6 @@ function App() {
   nextDate.setDate(currentDate.getDate() + 1);  
   const [currentMonthIndex, setCurrentMonthIndex] = useState(currentMonth);
   const [gridItems, setGridItems] = useState([]);
-  const [plans, setPlans] = useState([]);
 
   // These are related to Search Bar and the Results
   const [search, setSearch] = useState(""); 
@@ -37,7 +36,7 @@ function App() {
 
   // To Set up the grid of an array of 35, initialising each to nothing and setting id up for each array with empty text for now
   const calculateGridItems = (firstDay, finalDate, currentMonthIndex) => {
-    const gridItems = Array(35).fill("").map((_, index) => ({ id: index, text: " " })); 
+    const gridItems = Array(35).fill("").map((_, index) => ({ id: index, text: "\n " })); 
     
     // To ensure that plans are still linked to their correct dates even after refreshes
     for (let i = 0; i < sessionStorage.length; i++) { 
@@ -143,7 +142,7 @@ function App() {
 
   // TO allow each date to have editable text
   const handleEdit = (id) => { 
-    if (id >= currentDate && id < finalDate) { 
+    if (id >= currentDay + firstDay - 1 && id < finalDate) { 
       const newText = prompt("Add/Update your plan for this day: ", gridItems[id].text);
       if (newText !== null) {
           setGridItems((prev) => {
