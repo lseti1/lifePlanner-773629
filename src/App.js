@@ -174,18 +174,19 @@ function App() {
       <div className = "search" ref = {searchRef}>
         <input type ="search" className="searchBar" placeholder="Search for Plan... " value = {search} onChange = {(e) => setSearch(e.target.value)} onFocus={() => setIsVisible(true)}></input>
         {isVisible && (
-        <div className = "results">
-          {results.length > 0 ? (results.map((results, index) => (
-            <div className="result-item" key = {index}>
-              {results.plan} ({months[results.month]} {results.index - firstDay + 1})
-            </div>
-          ))) : search ? (<div className = "no-result">No plans found.</div> ) : null}
-        </div> )}
+          <div className = "results">
+            {results.length > 0 ? (results.map((results, index) => (
+              <div className="result-item" key = {index}>
+                <p>{results.plan} ({months[results.month]} {results.index - firstDay + 1})</p>
+              </div>
+            ))) : search ? (<p className="result-item">No plans found.</p>) : null}
+          </div>
+        )}
       </div>
       <div className = "calendarTitle">
-        <button className = "calendarButton bt1" onClick = {handlePrevMonthClick} >&lt;</button> {/* lt means less than symbol */}
-        {months[currentMonthIndex]}
-        <button className = "calendarButton bt2" onClick = {handleNextMonthClick}>&gt;</button> {/* gt means greater than symbol */}
+        <button className = "calendarButton bt1" onClick = {handlePrevMonthClick} >&lt;</button>
+        <p>{months[currentMonthIndex]}</p>
+        <button className = "calendarButton bt2" onClick = {handleNextMonthClick}>&gt;</button>
       </div>
       <div className = "daysOfWeek">
         <p>Monday</p>
