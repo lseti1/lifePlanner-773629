@@ -142,21 +142,15 @@ function App() {
 
   // TO allow each date to have editable text
   const handleEdit = (id) => { 
-    if (id >= currentDay + firstDay - 1 && id < finalDate) { 
+    if (id >= currentDay + firstDay - 1 && id < finalDate || currentMonthIndex > currentMonth) { 
       const newText = prompt("Add/Update your plan for this day: ", gridItems[id].text);
       if (newText !== null) {
           setGridItems((prev) => {
               const updatedGrid = prev.map((item) => item.id === id ? { ...item, text: " \n" + newText } : item);
               savePlan(newText, id, currentMonthIndex);
 
-              const planForToday = getPlan(id, currentMonthIndex);
-              console.log("New Plan '%s' Added at index '%d' of month '%d", newText, id, currentMonthIndex); 
-              console.log("Updated Grid Items:", updatedGrid); // Note that React runs code twice in development mode
-              console.log("Today's Plan: ", planForToday);
-              
-              const storedPlans = seePlans();
-              console.log("All Stored Plans: ", storedPlans);
-
+              console.log("Current Month Index: ", currentMonthIndex); 
+              console.log("Current Month:", currentMonth); // Note that React runs code twice in development mode
               return updatedGrid;
             });
         }
