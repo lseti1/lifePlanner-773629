@@ -195,7 +195,7 @@ function App() {
             key={item.id} 
             className={`daysGridArrays 
               ${item.id === currentDay + firstDay - 1 && currentMonth === currentMonthIndex ? "highlight" : ""}
-              ${item.id < firstDay || item.id >= finalDate || (item.id <= currentDay && currentMonthIndex <= currentMonth) ? "no-hover" : ""}
+              ${item.id >= currentDay + firstDay - 1 && item.id  < finalDate || currentMonthIndex > currentMonth ? "" : "no-hover"}
               ${item.id < currentDay + firstDay - 1 && currentMonthIndex === currentMonth ? "past-day" : ""}
               `}
             onClick={() => handleEdit(item.id)} >
