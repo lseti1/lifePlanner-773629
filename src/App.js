@@ -168,11 +168,10 @@ function App() {
   return (
     <div> 
       <div className = "topNamePlate">
-        <div>LifePlanner</div>
-        <button className="accountButton">User</button>
+        <h1>LifePlanner</h1>
       </div>
       <div className = "search" ref = {searchRef}>
-        <input type ="search" className="searchBar" placeholder="Search for Plan... " value = {search} onChange = {(e) => setSearch(e.target.value)} onFocus={() => setIsVisible(true)}></input>
+        <input type ="search" className="searchBar" placeholder="Search for Plan ... " value = {search} onChange = {(e) => setSearch(e.target.value)} onFocus={() => setIsVisible(true)}></input>
         {isVisible && (
           <div className = "results">
             {results.length > 0 ? (results.map((results, index) => (
@@ -185,7 +184,7 @@ function App() {
       </div>
       <div className = "calendarTitle">
         <button className = "calendarButton bt1" onClick = {handlePrevMonthClick} >&lt;</button>
-        <p>{months[currentMonthIndex]}</p>
+        <h2>{months[currentMonthIndex]}</h2>
         <button className = "calendarButton bt2" onClick = {handleNextMonthClick}>&gt;</button>
       </div>
       <div className = "daysOfWeek">
@@ -209,17 +208,24 @@ function App() {
             onClick={() => handleEdit(item.id)} >
             {item.id >= firstDay && item.id < finalDate && <div className="daysGridDates">{item.id - firstDay + 1}. </div>} {/* This is so that the date doesn't move off */}
             {item.text}
-          </div> ))}
+          </div> 
+        ))}
       </div>
-      <div className = "todayTitle">Today's Plans:</div>
+      <div className = "todayTitle">
+        <h2>Today's Plans:</h2>
+      </div>
       <div className="todayText">
-          <p>{TodaysPlan ? TodaysPlan.plan : "No Plans for Today."}</p>
+        <p>{TodaysPlan ? TodaysPlan.plan : "No Plans for Today."}</p>
       </div>
-      <div className = "tomorrowTitle">Tomorrow's Plans:</div>
+      <div className = "tomorrowTitle">
+        <h2>Tomorrow's Plans:</h2>
+      </div>
       <div className="tomorrowText">
         <p>{TomorrowsPlan ? TomorrowsPlan.plan : "No Plans for Tomorrow."}</p>
       </div>
-      <div className = "disclaimer">(Best viewed in Full Screen)</div>
+      <div className = "disclaimer">
+        <p>(Best viewed in Full Screen)</p>
+      </div>
     </div>
   );
 }

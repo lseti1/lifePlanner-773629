@@ -20,12 +20,22 @@ p {
   margin: 0px;
 }
 
+h1 {
+  padding: 0px;
+  margin: 0px;
+}
+
+h2 {
+  padding: 0px;
+  margin: 0px;
+}
+
 .topNamePlate {
   display: grid; 
   grid-template-columns: 1fr auto; 
   align-items: center; 
   text-indent: 2%; 
-  font-size: 3vh;
+  font-size: 2vh;
   font-weight: 700;
   background-color: rgba(0, 0, 0, 0.50);
   color: rgb(255, 255, 255);
@@ -38,31 +48,6 @@ p {
   top: 0%;
   left: 0%; 
   
-}
-
-.accountButton {
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  font-size: 1.5vh; 
-
-  width: 3%; 
-  aspect-ratio: 1 / 1;
-
-  border-radius: 50%; 
-  background-color: rgba(0, 0, 0, 0.38);
-  color: rgb(255, 255, 255);
-
-  cursor: pointer; 
-  transition: background-color 0.3s, color 0.3s; 
-
-  position: absolute;
-  right: 32px;
-}
-
-.accountButton:hover {
-  background-color: rgb(58, 39, 226); 
-  color: white; 
 }
 
 .searchBar {
@@ -118,7 +103,7 @@ p {
   align-items: center;
   justify-content: center; 
   gap: 20px;
-  font-size: 3.5vh;
+  font-size: 2.5vh;
   font-weight: 500;
 
   width: 65%;
@@ -137,7 +122,8 @@ p {
   background-color: hsla(0, 0%, 100%, 0);
   color: rgb(182, 182, 182);
   border: 0px;
-  font-size: 2.5vh;
+  font-size: 3vh;
+  font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
   
@@ -149,11 +135,11 @@ p {
 }
 
 .bt1 {
-  left: 41%;
+  left: 40%;
 }
 
 .bt2 {
-  right: 41%;
+  right: 40%;
 }
 
 .daysOfWeek {
@@ -230,7 +216,7 @@ p {
   text-align: left;
   align-items: center;
   text-indent: 20px;
-  font-size: 3vh;
+  font-size: 2vh;
   font-weight: 500;
 
   width: 30%;
@@ -265,7 +251,7 @@ p {
   align-items: center;
   text-align: left;
   text-indent: 20px;
-  font-size: 3vh;
+  font-size: 2vh;
   font-weight: 500;
 
   width: 30%;
@@ -309,6 +295,6 @@ p {
   box-sizing: border-box; 
 
   position: absolute;
-  top: 5.5%;
-  left: 0%;
+  top: 3.5%;
+  left: 11%;
 }
