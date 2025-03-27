@@ -183,18 +183,18 @@ function App() {
         </div> )}
       </div>
       <div className = "calendarTitle">
-        <button className = "calendarButton1" onClick = {handlePrevMonthClick} >&lt;</button> {/* lt means less than symbol */}
+        <button className = "calendarButton bt1" onClick = {handlePrevMonthClick} >&lt;</button> {/* lt means less than symbol */}
         {months[currentMonthIndex]}
-        <button className = "calendarButton2" onClick = {handleNextMonthClick}>&gt;</button> {/* gt means greater than symbol */}
+        <button className = "calendarButton bt2" onClick = {handleNextMonthClick}>&gt;</button> {/* gt means greater than symbol */}
       </div>
       <div className = "daysOfWeek">
-        <div>Monday</div>
-        <div>Tuesday</div>
-        <div>Wednesday</div>
-        <div>Thursday</div>
-        <div>Friday</div>
-        <div>Saturday</div>
-        <div>Sunday</div>
+        <p>Monday</p>
+        <p>Tuesday</p>
+        <p>Wednesday</p>
+        <p>Thursday</p>
+        <p>Friday</p>
+        <p>Saturday</p>
+        <p>Sunday</p>
       </div>
       <div className = "daysGrid">
         {gridItems.map((item) => (
@@ -212,11 +212,11 @@ function App() {
       </div>
       <div className = "todayTitle">Today's Plans:</div>
       <div className="todayText">
-          <div>{TodaysPlan ? TodaysPlan.plan : "No Plans for Today."}</div>
+          <p>{TodaysPlan ? TodaysPlan.plan : "No Plans for Today."}</p>
       </div>
       <div className = "tomorrowTitle">Tomorrow's Plans:</div>
       <div className="tomorrowText">
-        {TomorrowsPlan ? TomorrowsPlan.plan : "No Plans for Tomorrow."}
+        <p>{TomorrowsPlan ? TomorrowsPlan.plan : "No Plans for Tomorrow."}</p>
       </div>
       <div className = "disclaimer">(Best viewed in Full Screen)</div>
     </div>
