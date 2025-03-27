@@ -143,11 +143,11 @@ function App() {
 
   // TO allow each date to have editable text
   const handleEdit = (id) => { 
-    if (id >= firstDay && id < finalDate) { 
-      const newText = prompt("Add your plan for this day: ", gridItems[id].text);
+    if (id >= currentDate && id < finalDate) { 
+      const newText = prompt("Add/Update your plan for this day: ", gridItems[id].text);
       if (newText !== null) {
           setGridItems((prev) => {
-              const updatedGrid = prev.map((item) => item.id === id ? { ...item, text: newText } : item);
+              const updatedGrid = prev.map((item) => item.id === id ? { ...item, text: " \n" + newText } : item);
               savePlan(newText, id, currentMonthIndex);
 
               const planForToday = getPlan(id, currentMonthIndex);
