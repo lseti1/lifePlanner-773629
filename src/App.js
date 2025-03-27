@@ -142,7 +142,7 @@ function App() {
 
   // TO allow each date to have editable text
   const handleEdit = (id) => { 
-    if (id >= currentDay + firstDay - 1 && id < finalDate || currentMonthIndex > currentMonth) { 
+    if (id >= currentDay + firstDay - 1 && id < finalDate || currentMonthIndex > currentMonth && id > firstDay && id < finalDate) { 
       const newText = prompt("Add/Update your plan for this day: ", gridItems[id].text);
       if (newText !== null) {
           setGridItems((prev) => {
@@ -195,7 +195,7 @@ function App() {
             key={item.id} 
             className={`daysGridArrays 
               ${item.id === currentDay + firstDay - 1 && currentMonth === currentMonthIndex ? "highlight" : ""}
-              ${item.id >= currentDay + firstDay - 1 && item.id  < finalDate || currentMonthIndex > currentMonth ? "" : "no-hover"}
+              ${item.id >= currentDay + firstDay - 1 && item.id < finalDate || currentMonthIndex > currentMonth && item.id > firstDay - 1 && item.id < finalDate ? "" : "no-hover"}
               ${item.id < currentDay + firstDay - 1 && currentMonthIndex === currentMonth ? "past-day" : ""}
               `}
             onClick={() => handleEdit(item.id)} >
