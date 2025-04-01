@@ -5,10 +5,12 @@
 }
 
 body { 
-  background-image: url('/public/backgroundImage.jpg'); 
-  background-size: cover;
+  background-color: rgb(245, 245, 245);
+
+  /* background-image: url("/public/geometricBackground.jpg");
+  background-size: 100% 100%;
   background-position: center;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;  */
 
   height: 100vh;
   width: 100vw;
@@ -18,16 +20,20 @@ body {
 p {
   padding: 0px;
   margin: 0px;
+  font-weight: 100;
 }
 
 h1 {
   padding: 0px;
   margin: 0px;
+  font-weight: 500;
+  /* text-shadow: 0px 0px 5px black; */
 }
 
 h2 {
   padding: 0px;
   margin: 0px;
+  font-weight: 500;
 }
 
 .topNamePlate {
@@ -37,8 +43,10 @@ h2 {
   text-indent: 2%; 
   font-size: 2vh;
   font-weight: 700;
-  background-color: rgba(0, 0, 0, 0.50);
-  color: rgb(255, 255, 255);
+  box-sizing: border-box; 
+  background: linear-gradient(to bottom, rgb(30, 0, 112), rgb(45, 0, 168));
+  border-bottom: 5px solid rgb(255, 210, 87);
+  color: white;
 
   width: 100%;
   height: 8%;
@@ -56,10 +64,12 @@ h2 {
   font-size: 2vh;
   text-indent: 20px;
   grid-template-columns: 180px 100px;
-  background-color: rgba(0, 0, 0, 0.50);
-  color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+  box-shadow: 0px 0px 3px grey;
 
-  width: 30%;
+  width: 20%;
   height: 4%;
   box-sizing: border-box; 
   border: 0px;
@@ -76,8 +86,8 @@ h2 {
   text-indent: 10px;
 
 
-  width: 30%;
-  box-shadow: 0px 0px 10px black;
+  width: 20%;
+  box-shadow: 0px 0px 5px grey;
 
   position: absolute;
   top: 15%;
@@ -105,12 +115,17 @@ h2 {
   gap: 20px;
   font-size: 2.5vh;
   font-weight: 500;
-
   width: 65%;
   height: 6%;
   box-sizing: border-box; 
-  background-color: rgba(0, 0, 0, 0.50);
-  color: rgb(255, 255, 255);
+  background: linear-gradient(to bottom, rgb(30, 0, 112), rgb(45, 0, 168));
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
+  border-bottom: 5px solid rgb(255, 210, 87);
+  
+  
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
 
   position: absolute;
   top: 16%;
@@ -120,10 +135,10 @@ h2 {
 .calendarButton {
   display: grid;
   background-color: hsla(0, 0%, 100%, 0);
-  color: rgb(182, 182, 182);
+  color: rgb(255, 255, 255);
   border: 0px;
   font-size: 3vh;
-  font-weight: bold;
+  font-weight: 100;
   cursor: pointer;
   transition: 0.3s;
   
@@ -131,7 +146,7 @@ h2 {
 }
 
 .calendarButton:hover {
-  color: white;
+  color: rgb(185, 185, 185);
 }
 
 .bt1 {
@@ -146,13 +161,16 @@ h2 {
   display: grid;
   place-items: center;
   grid-template-columns: repeat(7, 2fr);
-  background-color: rgba(0, 0, 0, 0.50);
-  color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
+  
+  color: rgb(0, 0, 0);
   font-size: 2vh;
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
 
   width: 65%;
   height: 3%;
   box-sizing: border-box; 
+  /* box-shadow: 0px 0px 5px grey; */
 
   position: absolute;
   top: 22%;
@@ -164,12 +182,13 @@ h2 {
 
   width: 65%;
   height: 74%;
-  background-color: rgba(0, 0, 0, 0.42);
-  color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   box-sizing: border-box; 
 
   grid-template-columns: repeat(7, 2fr); 
   grid-template-rows: repeat(5, 2fr); 
+  /* box-shadow: 0px 0px 5px grey; */
 
   position: absolute;
   top: 25%;
@@ -177,8 +196,10 @@ h2 {
 }
 
 .highlight {
-  box-shadow: 0px 0px 10px white;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgb(235, 235, 235);
+  box-shadow: 0px 0px 5px grey;
+  color: rgb(0, 0, 0);
+  z-index: 100;
 }
 
 .daysGridArrays {
@@ -195,14 +216,16 @@ h2 {
   scrollbar-width: thin;
 
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.3s;
   padding: 10px;
-  border: 0.5px solid rgba(0, 0, 0, 0.25 );
+  border: 0.5px solid rgb(255, 210, 87);;
 }
 
 .daysGridArrays:hover {
-  box-shadow: 0px 0px 20px white;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgb(170, 170, 170);
+  box-shadow: 0px 0px 10px grey;
+  z-index: 100;
+  color: white;
 }
 
 .no-hover:hover {
@@ -213,8 +236,80 @@ h2 {
   color: transparent;
 }
 
+.planPopUpWindow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 40%;
+  gap: 2%;
+
+  background-color: white;
+  box-shadow: 0px 0px 5px grey;
+  color: rgb(5, 5, 5);
+  border-radius: 10px;
+  border: 3px solid rgb(255, 210, 87);
+  
+  z-index: 1000;
+
+  /* transition: 0.4s; */
+
+  position: absolute;
+  bottom: 30%;
+  right: 14%;
+}
+
+textarea {
+  display: flex;
+  text-align: center;
+  height: 60%;
+  width: 60%;
+  font-family: 'Roboto', sans-serif;
+
+  background-color: rgb(245, 245, 245); 
+  color: rgb(0, 0, 0);
+  font-size: 3vh;
+
+  box-shadow: 0px 0px 5px grey;
+  border: none;
+  border-radius: 10px;
+}
+
+.popUpWindowButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #eee; */
+  box-sizing: border-box;
+  padding: 15px;
+  width: 60%;
+  gap: 5%;
+}
+
+.popUpButton {
+  width: 30%;
+  height: 5vh;
+  border: none;
+  background-color: rgb(255, 255, 255);;
+  color: rgb(0, 0, 0);
+  font-size: 2.5vh;
+  /* font-weight: bolder; */
+
+  
+  border: 1px solid grey;
+  border-radius: 30px;
+  box-shadow: 0px 0px 2px grey;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.popUpButton:hover {
+  background-color: rgb(170, 170, 170);
+}
+
 .todayTitle {
-  display: grid;
+  display: flex;
   text-align: left;
   align-items: center;
   text-indent: 20px;
@@ -223,8 +318,16 @@ h2 {
 
   width: 30%;
   height: 5%;
-  background-color: rgba(0, 0, 0, 0.50);
+  background: linear-gradient(to bottom, rgb(30, 0, 112), rgb(45, 0, 168));
+  
+  
   color: rgb(255, 255, 255);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
+  border-bottom: 5px solid rgb(255, 210, 87);
+  box-sizing: border-box; 
+  padding-top: 5px;
 
   position: absolute;
   top: 16%;
@@ -233,15 +336,18 @@ h2 {
 
 
 .todayText {
-  display: grid;
-  text-align: left;
+  display: flex;
   text-indent: 20px;
   font-size: 2.5vh;
 
   width: 30%;
   height: 40%;
-  background-color: rgba(0, 0, 0, 0.38);
-  color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  box-sizing: border-box; 
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
 
   position: absolute;
   top: 21%;
@@ -249,18 +355,24 @@ h2 {
 }
 
 .tomorrowTitle {
-  display: grid;
+  display: flex;
   align-items: center;
-  text-align: left;
   text-indent: 20px;
   font-size: 2vh;
   font-weight: 500;
 
   width: 30%;
   height: 5%;
-  background-color: rgba(0, 0, 0, 0.50);
+  background: linear-gradient(to bottom, rgb(30, 0, 112), rgb(45, 0, 168));
   color: rgb(255, 255, 255);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   box-sizing: border-box; 
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
+  border-bottom: 5px solid rgb(255, 210, 87);
+  padding-top: 5px;
+
+  /* box-shadow: 0px 0px 5px grey; */
 
   position: absolute;
   top: 64%;
@@ -268,16 +380,18 @@ h2 {
 }
 
 .tomorrowText {
-  display: grid;
-  text-align: left;
+  display: flex;
   text-indent: 20px;
   font-size: 2.5vh;
 
   width: 30%;
   height: 30%;
-  background-color: rgba(0, 0, 0, 0.38);
-  color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   box-sizing: border-box; 
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
 
   position: absolute;
   top: 69%;
@@ -293,7 +407,7 @@ h2 {
   width: 100%;
   height: 3%;
   background-color: rgba(221, 20, 20, 0);
-  color: rgba(255, 255, 255, 0.507);
+  color: rgb(255, 255, 255);
   box-sizing: border-box; 
 
   position: absolute;

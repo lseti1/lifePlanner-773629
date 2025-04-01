@@ -13,11 +13,17 @@ function App() {
   const [currentMonthIndex, setCurrentMonthIndex] = useState(currentMonth);
   const [gridItems, setGridItems] = useState([]);
 
+  // These are related to having a pop up window (as oppose to a prompt)
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalText, setModalText] = useState('');
+  const [currentEditId, setCurrentEditId] = useState(null);
+
   // These are related to Search Bar and the Results
   const [search, setSearch] = useState(""); 
   const [results, setResults] = useState([]); 
   const [isVisible, setIsVisible] = useState(false); 
   const searchRef = useRef(null); 
+
 
   const getFirstDayOfMonth = (monthIndex) => {
     const year = 2025;
@@ -76,6 +82,12 @@ function App() {
     changeNextMonth();
     setGridItems(calculateGridItems(firstDay, finalDate));
   };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+    setModalText(''); // Clear the modal text
+  };
+
 
   const savePlan = (plan, index, month) => {
     const planData = { plan, index, month };
@@ -143,20 +155,26 @@ function App() {
   // TO allow each date to have editable text
   const handleEdit = (id) => { 
     if (id >= currentDay + firstDay - 1 && id < finalDate && currentMonthIndex == currentMonth || currentMonthIndex > currentMonth && id > firstDay && id < finalDate) { 
-      const newText = prompt("Add/Update your plan for this day: ", gridItems[id].text);
-      if (newText !== null) {
-          setGridItems((prev) => {
-              const updatedGrid = prev.map((item) => item.id === id ? { ...item, text: " \n" + newText } : item);
-              savePlan(newText, id, currentMonthIndex);
-
-              console.log("Current Month Index: ", currentMonthIndex); 
-              console.log("Current Month:", currentMonth); // Note that React runs code twice in development mode
-              return updatedGrid;
-            });
-        }
+      setCurrentEditId(id);
+      setModalText(gridItems[id].text);
+      setIsModalVisible(true);
     }
   };
 
+  const handleSave = () => {
+    if (currentEditId !== null) {
+      setGridItems((prev) => {
+        const updatedGrid = prev.map((item) => item.id === currentEditId ? { ...item, text: " \n" + modalText } : item);
+        
+        console.log("Current Month Index: ", currentMonthIndex); 
+        console.log("Current Month:", currentMonth); // Note that React runs code twice in development mode
+        return [...updatedGrid];
+      });
+
+      savePlan(modalText, currentEditId, currentMonthIndex);
+      closeModal();
+    }
+  };
 
   return (
     <div> 
@@ -204,6 +222,19 @@ function App() {
           </div> 
         ))}
       </div>
+      {isModalVisible && (
+        <div className="planPopUpWindow">
+          <h1>Update Plan Below: </h1>
+          <textarea
+            value={modalText} 
+            onChange={(e) => setModalText(e.target.value)}
+          />
+          <div className="popUpWindowButtons">
+            <button className="popUpButton" onClick={handleSave}>Save</button>
+            <button className="popUpButton" onClick={closeModal}>Exit</button>
+          </div>
+        </div>
+      )}
       <div className = "todayTitle">
         <h2>Today's Plans:</h2>
       </div>
@@ -220,6 +251,8 @@ function App() {
         <p>(Best viewed in Full Screen)</p>
       </div>
     </div>
+
+    
   );
 }
 
