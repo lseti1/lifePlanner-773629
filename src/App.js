@@ -7,10 +7,10 @@ function App() {
 
   const currentDate = new Date();
   const currentDay = currentDate.getDate();
-  const currentMonth  = currentDate.getMonth();
+  const currentMonth  = currentDate.getMonth(); // Relates to actual current month in real time
   const nextDate = new Date();
   nextDate.setDate(currentDate.getDate() + 1);  
-  const [currentMonthIndex, setCurrentMonthIndex] = useState(currentMonth);
+  const [currentMonthIndex, setCurrentMonthIndex] = useState(currentMonth); // Relates to current Month on the Calendar
   const [gridItems, setGridItems] = useState([]);
 
   // These are related to having a pop up window (as oppose to a prompt)
@@ -166,8 +166,10 @@ function App() {
       setGridItems((prev) => {
         const updatedGrid = prev.map((item) => item.id === currentEditId ? { ...item, text: " \n" + modalText } : item);
         
-        console.log("Current Month Index: ", currentMonthIndex); 
-        console.log("Current Month:", currentMonth); // Note that React runs code twice in development mode
+        console.log("Month in Calendar: ", months[currentMonthIndex]); 
+        console.log("Actual Current Month:", months[currentMonth]);
+
+
         return [...updatedGrid];
       });
 
@@ -179,7 +181,8 @@ function App() {
   return (
     <div> 
       <div className = "topNamePlate">
-        <h1>Life Planner</h1>
+        <h1><b>Life Planner</b></h1>
+        <h1>{months[currentMonth]} {currentDay}</h1>
       </div>
       <div className = "search" ref = {searchRef}>
         <input type ="search" className="searchBar" placeholder="Search for Plan ... " value = {search} onChange = {(e) => setSearch(e.target.value)} onFocus={() => setIsVisible(true)}></input>
@@ -225,8 +228,9 @@ function App() {
       {isModalVisible && (
         <>
           <div className="modalBackground" onClick={closeModal}></div>
-          <div className="modal">
-              <h1>Update Plan Below: </h1>
+          {gridItems.map((item) => (
+              <div className="modal" key={item.id}>
+              <h1>Update Plan Below:</h1>
               <textarea
                 value={modalText} 
                 onChange={(e) => setModalText(e.target.value)}
@@ -236,6 +240,7 @@ function App() {
                 <button className="modalButton" onClick={closeModal}>Exit</button>
               </div>
           </div>
+          ))}
         </>
       )}
 
