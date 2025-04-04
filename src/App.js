@@ -7,10 +7,10 @@ function App() {
 
   const currentDate = new Date();
   const currentDay = currentDate.getDate();
-  const currentMonth = currentDate.getMonth(); // Relates to actual current month in real time
+  const currentMonth = currentDate.getMonth(); 
   const nextDate = new Date();
   nextDate.setDate(currentDate.getDate() + 1);
-  const [currentMonthIndex, setCurrentMonthIndex] = useState(currentMonth); // Relates to current Month on the Calendar
+  const [currentMonthOnCalendar, setCurrentMonthOnCalendar] = useState(currentMonth);
   const [gridItems, setGridItems] = useState([]);
 
   // These are related to having a pop up window (as oppose to a prompt)
@@ -27,8 +27,8 @@ function App() {
 
   const getFirstDayOfMonth = (monthIndex) => {
     const year = 2025;
-    const firstDay = new Date(year, monthIndex, 1).getDay();
-    return firstDay - 1;
+    const firstDayIndex = new Date(year, monthIndex, 1).getDay();
+    return firstDayIndex - 1;
   };
 
   const numberOfDaysInMonth = (monthIndex) => {
@@ -37,17 +37,17 @@ function App() {
     return daysInMonth;
   };
 
-  const firstDay = getFirstDayOfMonth(currentMonthIndex);
-  const finalDate = getFirstDayOfMonth(currentMonthIndex) + numberOfDaysInMonth(currentMonthIndex);
+  const firstDayIndex = getFirstDayOfMonth(currentMonthOnCalendar);
+  const finalDayIndex = getFirstDayOfMonth(currentMonthOnCalendar) + numberOfDaysInMonth(currentMonthOnCalendar);
 
   // To Set up the grid of an array of 35, initialising each to nothing and setting id up for each array with empty text for now
-  const calculateGridItems = (firstDay, finalDate, currentMonthIndex) => {
+  const calculateGridItems = (firstDayIndex, finalDayIndex, currentMonthOnCalendar) => {
     const gridItems = Array(35).fill("").map((_, index) => ({ id: index, text: "\n " }));
 
     // To ensure that plans are still linked to their correct dates even after refreshes
     for (let i = 0; i < sessionStorage.length; i++) {
       const key = sessionStorage.key(i);
-      if (key.startsWith(`plan_${currentMonthIndex}_`)) {
+      if (key.startsWith(`plan_${currentMonthOnCalendar}_`)) {
         const savedPlan = JSON.parse(sessionStorage.getItem(key));
         const gridItem = gridItems.find((item) => item.id === savedPlan.index);
         if (gridItem) {
@@ -59,28 +59,31 @@ function App() {
   };
 
   useEffect(() => {
-    const firstDay = getFirstDayOfMonth(currentMonthIndex);
-    const finalDate = getFirstDayOfMonth(currentMonthIndex) + numberOfDaysInMonth(currentMonthIndex);
+    const firstDayIndex = getFirstDayOfMonth(currentMonthOnCalendar);
+    const finalDayIndex = getFirstDayOfMonth(currentMonthOnCalendar) + numberOfDaysInMonth(currentMonthOnCalendar);
 
-    const initialGridItems = calculateGridItems(firstDay, finalDate, currentMonthIndex);
+    console.log("First Day = ", firstDayIndex);
+    console.log("final date = ", finalDayIndex);
+
+    const initialGridItems = calculateGridItems(firstDayIndex, finalDayIndex, currentMonthOnCalendar);
     setGridItems(initialGridItems);
-  }, [currentMonthIndex]); // To get called each time currentMonthIndex is changed
+  }, [currentMonthOnCalendar]); // To get called each time currentMonthOnCalendar is changed
 
   const changePrevMonth = () => {
-    setCurrentMonthIndex((prevIndex) => (prevIndex === 0 ? 11 : prevIndex - 1));
+    setCurrentMonthOnCalendar((prevIndex) => (prevIndex === 0 ? 11 : prevIndex - 1));
   }
   const changeNextMonth = () => {
-    setCurrentMonthIndex((prevIndex) => (prevIndex === 11 ? 0 : prevIndex + 1));
+    setCurrentMonthOnCalendar((prevIndex) => (prevIndex === 11 ? 0 : prevIndex + 1));
   }
 
   const handlePrevMonthClick = () => {
     changePrevMonth();
-    setGridItems(calculateGridItems(firstDay, finalDate));
+    setGridItems(calculateGridItems(firstDayIndex, finalDayIndex));
   };
 
   const handleNextMonthClick = () => {
     changeNextMonth();
-    setGridItems(calculateGridItems(firstDay, finalDate));
+    setGridItems(calculateGridItems(firstDayIndex, finalDayIndex));
   };
 
   const closeModal = () => {
@@ -151,10 +154,12 @@ function App() {
 
   const TodaysPlan = getPlan(currentDay + getFirstDayOfMonth(currentMonth) - 1, currentMonth);
   const TomorrowsPlan = getPlan(currentDay + getFirstDayOfMonth(currentMonth), currentMonth);
+  const currentDayIndex = currentDay + firstDayIndex - 1;
+  const isCalendarOnCurrentMonth = currentMonthOnCalendar === currentMonth;
 
   // TO allow each date to have editable text
   const handleEdit = (id) => {
-    if (id >= currentDay + firstDay - 1 && id < finalDate && currentMonthIndex == currentMonth || currentMonthIndex > currentMonth && id > firstDay && id < finalDate) {
+    if (id >= currentDayIndex && id < finalDayIndex && currentMonthOnCalendar == currentMonth || currentMonthOnCalendar > currentMonth && id > firstDayIndex && id < finalDayIndex) {
       setCurrentEditId(id);
       setModalText(gridItems[id].text);
       setIsModalVisible(true);
@@ -166,12 +171,12 @@ function App() {
       setGridItems((prev) => {
         const updatedGrid = prev.map((item) => item.id === currentEditId ? { ...item, text: " \n" + modalText } : item);
 
-        console.log("Month in Calendar: ", months[currentMonthIndex]);
+        console.log("Month in Calendar: ", months[currentMonthOnCalendar]);
         console.log("Actual Current Month:", months[currentMonth]);
         return [...updatedGrid];
       });
 
-      savePlan(modalText, currentEditId, currentMonthIndex);
+      savePlan(modalText, currentEditId, currentMonthOnCalendar);
       closeModal();
     }
   };
@@ -188,7 +193,7 @@ function App() {
           <div className="results">
             {results.length > 0 ? (results.map((results, index) => (
               <div className="result-item" key={index}>
-                <p>{results.plan} ({months[results.month]} {results.index - firstDay + 1})</p>
+                <p>{results.plan} ({months[results.month]} {results.index - firstDayIndex + 1})</p>
               </div>
             ))) : search ? (<p className="result-item">No plans found.</p>) : null}
           </div>
@@ -196,7 +201,7 @@ function App() {
       </div>
       <div className="calendarTitle">
         <button className="calendarButton bt1" onClick={handlePrevMonthClick} >&lt;</button>
-        <h2>{months[currentMonthIndex]}</h2>
+        <h2>{months[currentMonthOnCalendar]}</h2>
         <button className="calendarButton bt2" onClick={handleNextMonthClick}>&gt;</button>
       </div>
       <div className="daysOfWeek">
@@ -213,12 +218,12 @@ function App() {
           <div
             key={item.id}
             className={`daysGridArrays 
-              ${item.id === currentDay + firstDay - 1 && currentMonth === currentMonthIndex ? "highlight" : ""}
-              ${item.id >= currentDay + firstDay - 1 && item.id < finalDate && currentMonthIndex === currentMonth || currentMonthIndex > currentMonth && item.id > firstDay - 1 && item.id < finalDate ? "" : "no-hover"}
-              ${item.id < currentDay + firstDay - 1 && currentMonthIndex === currentMonth || currentMonthIndex < currentMonth ? "past-day" : ""}
+              ${item.id === currentDayIndex && isCalendarOnCurrentMonth ? "highlight" : ""}
+              ${item.id >= currentDayIndex && item.id < finalDayIndex && isCalendarOnCurrentMonth || currentMonthOnCalendar > currentMonth && item.id > firstDayIndex - 1 && item.id < finalDayIndex ? "" : "no-hover"}
+              ${item.id < currentDayIndex && isCalendarOnCurrentMonth || currentMonthOnCalendar < currentMonth ? "past-day" : ""}
               `}
             onClick={() => handleEdit(item.id)} >
-            {item.id >= firstDay && item.id < finalDate && <div className="daysGridDates">{item.id - firstDay + 1}.</div>} {/* This is so that the date doesn't move off */}
+            {item.id >= firstDayIndex && item.id < finalDayIndex && <div className="daysGridDates">{item.id - firstDayIndex + 1}.</div>} {/* This is so that the date doesn't move off */}
             {item.text}
           </div>
         ))}
@@ -228,7 +233,7 @@ function App() {
           <div className="modalBackground" onClick={closeModal}></div>
           {gridItems.map((item) => (
             <div className="modal" key={item.id}>
-              <h1>{months[currentMonthIndex]} {currentEditId} Plan: </h1>
+              <h1>{months[currentMonthOnCalendar]} {currentEditId} Plan: </h1>
               <textarea
                 value={modalText}
                 onChange={(e) => setModalText(e.target.value)}
