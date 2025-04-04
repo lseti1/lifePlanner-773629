@@ -193,7 +193,7 @@ function App() {
           <div className="results">
             {results.length > 0 ? (results.map((results, index) => (
               <div className="result-item" key={index}>
-                <p>{results.plan} ({months[results.month]} {results.index - firstDayIndex + 1})</p>
+                <p>{results.plan} ({months[results.month]} {results.index - getFirstDayOfMonth(currentMonth) + 1})</p>
               </div>
             ))) : search ? (<p className="result-item">No plans found.</p>) : null}
           </div>
