@@ -214,7 +214,7 @@ function App() {
             className={`daysGridArrays 
               ${item.id === currentDay + firstDay - 1 && currentMonth === currentMonthIndex ? "highlight" : ""}
               ${item.id >= currentDay + firstDay - 1 && item.id < finalDate && currentMonthIndex == currentMonth || currentMonthIndex > currentMonth && item.id > firstDay - 1 && item.id < finalDate ? "" : "no-hover"}
-              ${item.id < currentDay + firstDay - 1 && currentMonthIndex === currentMonth ? "past-day" : ""}
+              ${item.id < currentDay + firstDay - 1 && currentMonthIndex === currentMonth || currentMonthIndex < currentMonth ? "past-day" : ""}
               `}
             onClick={() => handleEdit(item.id)} >
             {item.id >= firstDay && item.id < finalDate && <div className="daysGridDates">{item.id - firstDay + 1}. </div>} {/* This is so that the date doesn't move off */}
