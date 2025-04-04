@@ -7,9 +7,9 @@ function App() {
 
   const currentDate = new Date();
   const currentDay = currentDate.getDate();
-  const currentMonth  = currentDate.getMonth(); // Relates to actual current month in real time
+  const currentMonth = currentDate.getMonth(); // Relates to actual current month in real time
   const nextDate = new Date();
-  nextDate.setDate(currentDate.getDate() + 1);  
+  nextDate.setDate(currentDate.getDate() + 1);
   const [currentMonthIndex, setCurrentMonthIndex] = useState(currentMonth); // Relates to current Month on the Calendar
   const [gridItems, setGridItems] = useState([]);
 
@@ -19,10 +19,10 @@ function App() {
   const [currentEditId, setCurrentEditId] = useState(null);
 
   // These are related to Search Bar and the Results
-  const [search, setSearch] = useState(""); 
-  const [results, setResults] = useState([]); 
-  const [isVisible, setIsVisible] = useState(false); 
-  const searchRef = useRef(null); 
+  const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const searchRef = useRef(null);
 
 
   const getFirstDayOfMonth = (monthIndex) => {
@@ -42,20 +42,20 @@ function App() {
 
   // To Set up the grid of an array of 35, initialising each to nothing and setting id up for each array with empty text for now
   const calculateGridItems = (firstDay, finalDate, currentMonthIndex) => {
-    const gridItems = Array(35).fill("").map((_, index) => ({ id: index, text: "\n " })); 
-    
+    const gridItems = Array(35).fill("").map((_, index) => ({ id: index, text: "\n " }));
+
     // To ensure that plans are still linked to their correct dates even after refreshes
-    for (let i = 0; i < sessionStorage.length; i++) { 
+    for (let i = 0; i < sessionStorage.length; i++) {
       const key = sessionStorage.key(i);
       if (key.startsWith(`plan_${currentMonthIndex}_`)) {
         const savedPlan = JSON.parse(sessionStorage.getItem(key));
         const gridItem = gridItems.find((item) => item.id === savedPlan.index);
         if (gridItem) {
-          gridItem.text = savedPlan.plan; 
+          gridItem.text = savedPlan.plan;
         }
       }
     }
-    return gridItems; 
+    return gridItems;
   };
 
   useEffect(() => {
@@ -77,7 +77,7 @@ function App() {
     changePrevMonth();
     setGridItems(calculateGridItems(firstDay, finalDate));
   };
-  
+
   const handleNextMonthClick = () => {
     changeNextMonth();
     setGridItems(calculateGridItems(firstDay, finalDate));
@@ -101,24 +101,24 @@ function App() {
     return storedPlan ? JSON.parse(storedPlan) : null;
   };
 
-  
+
   // To allow search function for any plans
-  const seePlans = () => { 
-    const allPlans = []; 
+  const seePlans = () => {
+    const allPlans = [];
     for (let i = 0; i < sessionStorage.length; i++) {
-      const key = sessionStorage.key(i); 
-      if (key.startsWith("plan_")) {     
-        const plan = JSON.parse(sessionStorage.getItem(key)); 
-        allPlans.push(plan);             
+      const key = sessionStorage.key(i);
+      if (key.startsWith("plan_")) {
+        const plan = JSON.parse(sessionStorage.getItem(key));
+        allPlans.push(plan);
       }
     }
-    return allPlans; 
+    return allPlans;
   }
 
   // To have all the plans in one place and casing to be ignored when searching
-  const searchPlans = (search) => { 
+  const searchPlans = (search) => {
     const allPlans = seePlans();
-    return allPlans.filter((plan) => 
+    return allPlans.filter((plan) =>
       plan.plan.toLowerCase().includes(search.toLowerCase())
     );
   };
@@ -128,17 +128,17 @@ function App() {
     if (search) {
       const filteredResults = searchPlans(search);
       setResults(filteredResults);
-      setIsVisible(true); 
-    } 
+      setIsVisible(true);
+    }
     else {
-      setResults ([]);
+      setResults([]);
     }
   }, [search]);
 
   // To hide results when search bar is clicked off
   const handleMinimising = (event) => {
     if (searchRef.current && !searchRef.current.contains(event.target)) {
-      setIsVisible(false); 
+      setIsVisible(false);
     }
   };
 
@@ -153,8 +153,8 @@ function App() {
   const TomorrowsPlan = getPlan(currentDay + firstDay, currentMonth);
 
   // TO allow each date to have editable text
-  const handleEdit = (id) => { 
-    if (id >= currentDay + firstDay - 1 && id < finalDate && currentMonthIndex == currentMonth || currentMonthIndex > currentMonth && id > firstDay && id < finalDate) { 
+  const handleEdit = (id) => {
+    if (id >= currentDay + firstDay - 1 && id < finalDate && currentMonthIndex == currentMonth || currentMonthIndex > currentMonth && id > firstDay && id < finalDate) {
       setCurrentEditId(id);
       setModalText(gridItems[id].text);
       setIsModalVisible(true);
@@ -165,11 +165,9 @@ function App() {
     if (currentEditId !== null) {
       setGridItems((prev) => {
         const updatedGrid = prev.map((item) => item.id === currentEditId ? { ...item, text: " \n" + modalText } : item);
-        
-        console.log("Month in Calendar: ", months[currentMonthIndex]); 
+
+        console.log("Month in Calendar: ", months[currentMonthIndex]);
         console.log("Actual Current Month:", months[currentMonth]);
-
-
         return [...updatedGrid];
       });
 
@@ -179,29 +177,29 @@ function App() {
   };
 
   return (
-    <div> 
-      <div className = "topNamePlate">
+    <div>
+      <div className="topNamePlate">
         <h1><b>Life Planner</b></h1>
         <h1>{months[currentMonth]} {currentDay}</h1>
       </div>
-      <div className = "search" ref = {searchRef}>
-        <input type ="search" className="searchBar" placeholder="Search for Plan ... " value = {search} onChange = {(e) => setSearch(e.target.value)} onFocus={() => setIsVisible(true)}></input>
+      <div className="search" ref={searchRef}>
+        <input type="search" className="searchBar" placeholder="Search for Plan ... " value={search} onChange={(e) => setSearch(e.target.value)} onFocus={() => setIsVisible(true)}></input>
         {isVisible && (
-          <div className = "results">
+          <div className="results">
             {results.length > 0 ? (results.map((results, index) => (
-              <div className="result-item" key = {index}>
+              <div className="result-item" key={index}>
                 <p>{results.plan} ({months[results.month]} {results.index - firstDay + 1})</p>
               </div>
             ))) : search ? (<p className="result-item">No plans found.</p>) : null}
           </div>
         )}
       </div>
-      <div className = "calendarTitle">
-        <button className = "calendarButton bt1" onClick = {handlePrevMonthClick} >&lt;</button>
+      <div className="calendarTitle">
+        <button className="calendarButton bt1" onClick={handlePrevMonthClick} >&lt;</button>
         <h2>{months[currentMonthIndex]}</h2>
-        <button className = "calendarButton bt2" onClick = {handleNextMonthClick}>&gt;</button>
+        <button className="calendarButton bt2" onClick={handleNextMonthClick}>&gt;</button>
       </div>
-      <div className = "daysOfWeek">
+      <div className="daysOfWeek">
         <p>Monday</p>
         <p>Tuesday</p>
         <p>Wednesday</p>
@@ -210,58 +208,58 @@ function App() {
         <p>Saturday</p>
         <p>Sunday</p>
       </div>
-      <div className = "daysGrid">
+      <div className="daysGrid">
         {gridItems.map((item) => (
-          <div 
-            key={item.id} 
+          <div
+            key={item.id}
             className={`daysGridArrays 
               ${item.id === currentDay + firstDay - 1 && currentMonth === currentMonthIndex ? "highlight" : ""}
               ${item.id >= currentDay + firstDay - 1 && item.id < finalDate && currentMonthIndex == currentMonth || currentMonthIndex > currentMonth && item.id > firstDay - 1 && item.id < finalDate ? "" : "no-hover"}
               ${item.id < currentDay + firstDay - 1 && currentMonthIndex === currentMonth || currentMonthIndex < currentMonth ? "past-day" : ""}
               `}
             onClick={() => handleEdit(item.id)} >
-            {item.id >= firstDay && item.id < finalDate && <div className="daysGridDates">{item.id - firstDay + 1}. </div>} {/* This is so that the date doesn't move off */}
+            {item.id >= firstDay && item.id < finalDate && <div className="daysGridDates">{item.id - firstDay + 1}.</div>} {/* This is so that the date doesn't move off */}
             {item.text}
-          </div> 
+          </div>
         ))}
       </div>
       {isModalVisible && (
         <>
           <div className="modalBackground" onClick={closeModal}></div>
           {gridItems.map((item) => (
-              <div className="modal" key={item.id}>
-              <h1>Update Plan Below:</h1>
+            <div className="modal" key={item.id}>
+              <h1>{months[currentMonthIndex]} {currentEditId} Plan: </h1>
               <textarea
-                value={modalText} 
+                value={modalText}
                 onChange={(e) => setModalText(e.target.value)}
               />
               <div className="modalButtonsContainer">
                 <button className="modalButton" onClick={handleSave}>Save</button>
                 <button className="modalButton" onClick={closeModal}>Exit</button>
               </div>
-          </div>
+            </div>
           ))}
         </>
       )}
 
-      <div className = "todayTitle">
+      <div className="todayTitle">
         <h2>Today's Plans:</h2>
       </div>
       <div className="todayText">
         <p>{TodaysPlan ? TodaysPlan.plan : "No Plans for Today."}</p>
       </div>
-      <div className = "tomorrowTitle">
+      <div className="tomorrowTitle">
         <h2>Tomorrow's Plans:</h2>
       </div>
       <div className="tomorrowText">
         <p>{TomorrowsPlan ? TomorrowsPlan.plan : "No Plans for Tomorrow."}</p>
       </div>
-      <div className = "disclaimer">
+      <div className="disclaimer">
         <p>(Best viewed in Full Screen)</p>
       </div>
     </div>
 
-    
+
   );
 }
 

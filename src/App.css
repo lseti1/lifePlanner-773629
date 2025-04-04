@@ -230,7 +230,7 @@ p, h1, h2 {
   justify-content: center;
   align-items: center;
   width: 40%;
-  height: 40%;
+  height: 50%;
   gap: 2%;
 
   background-color: white;
@@ -244,7 +244,7 @@ p, h1, h2 {
   /* transition: 0.4s; */
 
   position: absolute;
-  bottom: 30%;
+  bottom: 25%;
   right: 30%;
 }
 
