@@ -188,14 +188,14 @@ function App() {
         <h1>{months[currentMonth]} {currentDay}</h1>
       </div>
       <div className="search" ref={searchRef}>
-        <input type="search" className="searchBar" placeholder="Search for Plan ... " value={search} onChange={(e) => setSearch(e.target.value)} onFocus={() => setIsVisible(true)}></input>
+        <input type="search" className="searchBar" placeholder="Search for Plan... " value={search} onChange={(e) => setSearch(e.target.value)} onFocus={() => setIsVisible(true)}></input>
         {isVisible && (
           <div className="results">
             {results.length > 0 ? (results.map((results, index) => (
-              <div className="result-item" key={index}>
-                <p>{results.plan} ({months[results.month]} {results.index - getFirstDayOfMonth(currentMonth) + 1})</p>
+              <div className="resultItem" key={index}>
+                <li onClick={() => setCurrentMonthOnCalendar(results.month)}>{results.plan} ({months[results.month]} {results.index - getFirstDayOfMonth(currentMonth) + 1})</li>
               </div>
-            ))) : search ? (<p className="result-item">No plans found.</p>) : null}
+            ))) : search ? (<p className="resultItem">No plans found.</p>) : null}
           </div>
         )}
       </div>
@@ -218,9 +218,9 @@ function App() {
           <div
             key={item.id}
             className={`daysGridArrays 
-              ${item.id === currentDayIndex && isCalendarOnCurrentMonth ? "highlight" : ""}
-              ${item.id >= currentDayIndex && item.id < finalDayIndex && isCalendarOnCurrentMonth || currentMonthOnCalendar > currentMonth && item.id > firstDayIndex - 1 && item.id < finalDayIndex ? "" : "no-hover"}
-              ${item.id < currentDayIndex && isCalendarOnCurrentMonth || currentMonthOnCalendar < currentMonth ? "past-day" : ""}
+              ${item.id === currentDayIndex && isCalendarOnCurrentMonth ? "today" : ""}
+              ${item.id >= currentDayIndex && item.id < finalDayIndex && isCalendarOnCurrentMonth || currentMonthOnCalendar > currentMonth && item.id > firstDayIndex - 1 && item.id < finalDayIndex ? "" : "noHover"}
+              ${item.id < currentDayIndex && isCalendarOnCurrentMonth || currentMonthOnCalendar < currentMonth ? "pastDay" : ""}
               `}
             onClick={() => handleEdit(item.id)} >
             {item.id >= firstDayIndex && item.id < finalDayIndex && <div className="daysGridDates">{item.id - firstDayIndex + 1}.</div>} {/* This is so that the date doesn't move off */}

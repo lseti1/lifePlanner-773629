@@ -17,7 +17,7 @@ body {
   overflow: hidden;
 }
 
-p, h1, h2 {
+p, h1, h2, li {
   padding: 0px;
   margin: 0px;
   font-weight: 100;
@@ -55,6 +55,7 @@ p, h1, h2 {
   color: rgb(0, 0, 0);
   border-radius: 10px;
   box-shadow: 0px 0px 3px grey;
+  z-index: 1000;
 
   width: 20%;
   height: 4%;
@@ -62,16 +63,15 @@ p, h1, h2 {
   border: 0px;
 
   position: absolute;
-  top: 11%;
+  top: 10%;
   left: 1%;
 }
 
 .results {
   background-color: #ffffff;
-  z-index: 1000;
+  z-index: 999;
   font-size: 2vh;
   text-indent: 10px;
-
 
   width: 20%;
   box-shadow: 0px 0px 5px grey;
@@ -81,13 +81,22 @@ p, h1, h2 {
   left: 1%;
 }
 
-.result-item {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
+li {
+  list-style-type: none;
+  transition: 0.4s;
+  
 }
 
-.result-item:last-child {
-  border-bottom: none;
+.resultItem {
+  padding: 3%;
+  border-bottom: 1px solid #eee;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.resultItem:hover {
+  background-color: rgb(45, 0, 168);
+  color: white;
 }
 
 .no-results {
@@ -182,7 +191,7 @@ p, h1, h2 {
   right: 1%;
 }
 
-.highlight {
+.today {
   background-color: rgb(45, 0, 168);
   box-shadow: 0px 0px 5px grey;
   color: rgb(255, 255, 255);
@@ -215,11 +224,11 @@ p, h1, h2 {
   color: white;
 }
 
-.no-hover:hover {
+.noHover:hover {
   pointer-events: none; 
 }
 
-.past-day {
+.pastDay {
   color: rgba(0, 0, 0, 0.301);
   background-color: rgb(245, 245, 245);
 }
