@@ -223,18 +223,21 @@ function App() {
         ))}
       </div>
       {isModalVisible && (
-        <div className="planPopUpWindow">
-          <h1>Update Plan Below: </h1>
-          <textarea
-            value={modalText} 
-            onChange={(e) => setModalText(e.target.value)}
-          />
-          <div className="popUpWindowButtons">
-            <button className="popUpButton" onClick={handleSave}>Save</button>
-            <button className="popUpButton" onClick={closeModal}>Exit</button>
+        <div className="modalBackground" onClick={closeModal}> 
+            <div className="modal">
+            <h1>Update Plan Below: </h1>
+            <textarea
+              value={modalText} 
+              onChange={(e) => setModalText(e.target.value)}
+            />
+            <div className="modalButtonsContainer">
+              <button className="modalButton" onClick={handleSave}>Save</button>
+              <button className="modalButton" onClick={closeModal}>Exit</button>
+            </div>
           </div>
         </div>
       )}
+
       <div className = "todayTitle">
         <h2>Today's Plans:</h2>
       </div>

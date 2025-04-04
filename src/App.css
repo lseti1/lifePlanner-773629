@@ -236,7 +236,7 @@ h2 {
   color: transparent;
 }
 
-.planPopUpWindow {
+.modal {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -257,7 +257,7 @@ h2 {
 
   position: absolute;
   bottom: 30%;
-  right: 14%;
+  right: 30%;
 }
 
 textarea {
@@ -276,7 +276,7 @@ textarea {
   border-radius: 10px;
 }
 
-.popUpWindowButtons {
+.modalButtonsContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -287,15 +287,14 @@ textarea {
   gap: 5%;
 }
 
-.popUpButton {
+.modalButton {
   width: 30%;
   height: 5vh;
   border: none;
-  background-color: rgb(255, 255, 255);;
+  background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
   font-size: 2.5vh;
   /* font-weight: bolder; */
-
   
   border: 1px solid grey;
   border-radius: 30px;
@@ -304,8 +303,20 @@ textarea {
   cursor: pointer;
 }
 
-.popUpButton:hover {
-  background-color: rgb(170, 170, 170);
+.modalButton:hover {
+  background-color:  rgb(255, 210, 87);
+}
+
+.modalBackground {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  z-index: 999;
+  position: absolute;
+  top: 0%;
+  left: 0%;
 }
 
 .todayTitle {
