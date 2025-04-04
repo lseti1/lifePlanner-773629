@@ -149,8 +149,8 @@ function App() {
     };
   }, []);
 
-  const TodaysPlan = getPlan(currentDay + firstDay - 1, currentMonth);
-  const TomorrowsPlan = getPlan(currentDay + firstDay, currentMonth);
+  const TodaysPlan = getPlan(currentDay + getFirstDayOfMonth(currentMonth) - 1, currentMonth);
+  const TomorrowsPlan = getPlan(currentDay + getFirstDayOfMonth(currentMonth), currentMonth);
 
   // TO allow each date to have editable text
   const handleEdit = (id) => {
@@ -214,7 +214,7 @@ function App() {
             key={item.id}
             className={`daysGridArrays 
               ${item.id === currentDay + firstDay - 1 && currentMonth === currentMonthIndex ? "highlight" : ""}
-              ${item.id >= currentDay + firstDay - 1 && item.id < finalDate && currentMonthIndex == currentMonth || currentMonthIndex > currentMonth && item.id > firstDay - 1 && item.id < finalDate ? "" : "no-hover"}
+              ${item.id >= currentDay + firstDay - 1 && item.id < finalDate && currentMonthIndex === currentMonth || currentMonthIndex > currentMonth && item.id > firstDay - 1 && item.id < finalDate ? "" : "no-hover"}
               ${item.id < currentDay + firstDay - 1 && currentMonthIndex === currentMonth || currentMonthIndex < currentMonth ? "past-day" : ""}
               `}
             onClick={() => handleEdit(item.id)} >
