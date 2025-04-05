@@ -11,7 +11,7 @@ function App() {
   const nextDate = new Date();
   nextDate.setDate(currentDate.getDate() + 1);
   const [currentMonthOnCalendar, setCurrentMonthOnCalendar] = useState(currentMonth);
-  const [gridItems, setGridItems] = useState(Array(35).fill("").map((_, index) => ({ id: index, text: "" })));
+  const [gridItems, setGridItems] = useState([]);
 
   // These are related to having a pop up window (as oppose to a prompt)
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -42,7 +42,7 @@ function App() {
 
   // To Set up the grid of an array of 35, initialising each to nothing and setting id up for each array with empty text for now
   const calculateGridItems = (firstDayIndex, finalDayIndex, currentMonthOnCalendar) => {
-    // const gridItems = Array(35).fill("").map((_, index) => ({ id: index, text: "\n " }));
+    const gridItems = Array(35).fill("").map((_, index) => ({ id: index, text: "\n " }));
 
     // To ensure that plans are still linked to their correct dates even after refreshes
     for (let i = 0; i < sessionStorage.length; i++) {
