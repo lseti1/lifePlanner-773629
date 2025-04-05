@@ -202,6 +202,7 @@ li {
   overflow-x: hidden;
   white-space: normal;
   scrollbar-width: thin;
+  word-wrap: break-word;
 
   cursor: pointer;
   transition: 0.5s;
@@ -364,7 +365,6 @@ textarea {
   top: 16%;
   left: 1%;
 }
-
 
 .todayText {
   display: flex;
