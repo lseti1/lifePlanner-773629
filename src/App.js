@@ -172,8 +172,9 @@ function App() {
       setGridItems((prev) => {
         return prev.map((item) => item.id === currentEditId ? { ...item, text: modalText } : item);
       });
-
-      savePlan(modalText, selectedDayIndex, currentMonthOnCalendar);
+      console.log("currentEditId = ", currentEditId);
+      console.log("selectedDayIndex = ", selectedDayIndex);
+      savePlan(modalText, currentEditId, currentMonthOnCalendar);
       closeModal();
     }
   };
@@ -200,7 +201,7 @@ function App() {
             {results.length > 0 ? (results.map((results, index) => (
               <div className="resultItem" key={index}>
                 <li onClick={() => {setCurrentMonthOnCalendar(results.month); setIsVisible(false);}}>
-                  {results.plan} ({months[results.month]} {results.index - getFirstDayOfMonth(currentMonth) + 1})
+                  {results.plan} ({months[results.month]} {results.index - getFirstDayOfMonth(results.month) + 1})
                 </li>
               </div>
             ))) : search ? (<p className="resultItem">No plans found.</p>) : null}
