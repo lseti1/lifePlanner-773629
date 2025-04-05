@@ -70,6 +70,7 @@ p, h1, h2, li {
   background-color: #ffffff;
   font-size: 2vh;
   text-indent: 10px;
+  z-index: 500;
 
   width: 20%;
   box-shadow: 0px 0px 5px grey;
