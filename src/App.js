@@ -233,7 +233,7 @@ function App() {
               <div className="daysGridDates">{item.id - firstDayIndex + 1}.</div>
             )} 
             {item.text}
-            <button className="daysGridArrayButton" onClick={(e) => handleQuickDelete(e, item.id)}>X</button>            
+            <button className="daysGridArrayDeleteButton" onClick={(e) => handleQuickDelete(e, item.id)}>Clear</button>            
           </div>
         ))}
       </div>
