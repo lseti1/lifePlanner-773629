@@ -154,8 +154,9 @@ function App() {
 
   const TodaysPlan = getPlan(currentDay + getFirstDayOfMonth(currentMonth) - 1, currentMonth);
   const TomorrowsPlan = getPlan(currentDay + getFirstDayOfMonth(currentMonth), currentMonth);
-  const currentDayIndex = currentDay + firstDayIndex - 1;
+  const currentDayIndex = currentDay + firstDayIndex - 1; 
   const isCalendarOnCurrentMonth = currentMonthOnCalendar === currentMonth;
+  const selectedDayIndex = currentEditId - firstDayIndex + 1;
 
   // TO allow each date to have editable text
   const handleEdit = (id) => {
@@ -172,7 +173,7 @@ function App() {
         return prev.map((item) => item.id === currentEditId ? { ...item, text: modalText } : item);
       });
 
-      savePlan(modalText, currentEditId, currentMonthOnCalendar);
+      savePlan(modalText, selectedDayIndex, currentMonthOnCalendar);
       closeModal();
     }
   };
@@ -240,7 +241,7 @@ function App() {
           <div className="modalBackground" onClick={closeModal}></div>
           {gridItems.map((item) => (
             <div className="modal" key={item.id}>
-              <h1>{months[currentMonthOnCalendar]} {currentEditId} Plan: </h1>
+              <h1>{months[currentMonthOnCalendar]} {selectedDayIndex} Plan: </h1>
               <textarea
                 value={modalText}
                 onChange={(e) => setModalText(e.target.value)}
