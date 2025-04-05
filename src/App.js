@@ -24,6 +24,7 @@ function App() {
   const [isVisible, setIsVisible] = useState(false);
   const searchRef = useRef(null);
 
+  // These are related to the Today/Tomorrow Plan
 
   const getFirstDayOfMonth = (monthIndex) => {
     const year = 2025;
@@ -42,7 +43,7 @@ function App() {
 
   // To Set up the grid of an array of 35, initialising each to nothing and setting id up for each array with empty text for now
   const calculateGridItems = (firstDayIndex, finalDayIndex, currentMonthOnCalendar) => {
-    const gridItems = Array(35).fill("").map((_, index) => ({ id: index, text: "\n " }));
+    const gridItems = Array(35).fill("").map((_, index) => ({ id: index, text: "" }));
 
     // To ensure that plans are still linked to their correct dates even after refreshes
     for (let i = 0; i < sessionStorage.length; i++) {
@@ -90,7 +91,6 @@ function App() {
     setIsModalVisible(false);
     setModalText(''); // Clear the modal text
   };
-
 
   const savePlan = (plan, index, month) => {
     const planData = { plan, index, month };
@@ -260,13 +260,13 @@ function App() {
         <h2>Today's Plans:</h2>
       </div>
       <div className="todayText">
-        <p>{TodaysPlan ? TodaysPlan.plan : "No Plans for Today."}</p>
+        <p>{TodaysPlan ? TodaysPlan.plan.trim() != "" ? TodaysPlan.plan : "No Plans For Today" : "No Plans For Today"}</p>
       </div>
       <div className="tomorrowTitle">
         <h2>Tomorrow's Plans:</h2>
       </div>
       <div className="tomorrowText">
-        <p>{TomorrowsPlan ? TomorrowsPlan.plan : "No Plans for Tomorrow."}</p>
+        <p>{TomorrowsPlan ? TomorrowsPlan.plan.trim() != "" ? TomorrowsPlan.plan : "No Plans For Today" : "No Plans For Today"}</p>
       </div>
       <div className="disclaimer">
         <p>This app uses Session Storage, plans <br />will not be saved when closed<br />(Also best viewed in Full Screen)</p>
