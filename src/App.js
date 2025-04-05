@@ -200,7 +200,7 @@ function App() {
           <div className="results">
             {results.length > 0 ? (results.map((results, index) => (
               <div className="resultItem" key={index}>
-                <li onClick={() => {setCurrentMonthOnCalendar(results.month); setIsVisible(false);}}>
+                <li onClick={() => {setCurrentMonthOnCalendar(results.month); setIsVisible(false); setSearch(""); }}>
                   {results.plan} ({months[results.month]} {results.index - getFirstDayOfMonth(results.month) + 1})
                 </li>
               </div>
