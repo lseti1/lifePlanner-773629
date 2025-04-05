@@ -198,7 +198,9 @@ function App() {
           <div className="results">
             {results.length > 0 ? (results.map((results, index) => (
               <div className="resultItem" key={index}>
-                <li onClick={() => setCurrentMonthOnCalendar(results.month)}>{results.plan} ({months[results.month]} {results.index - getFirstDayOfMonth(currentMonth) + 1})</li>
+                <li onClick={() => {setCurrentMonthOnCalendar(results.month); setIsVisible(false);}}>
+                  {results.plan} ({months[results.month]} {results.index - getFirstDayOfMonth(currentMonth) + 1})
+                </li>
               </div>
             ))) : search ? (<p className="resultItem">No plans found.</p>) : null}
           </div>
