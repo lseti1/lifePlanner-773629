@@ -204,7 +204,7 @@ function App() {
                   {results.plan} ({months[results.month]} {results.index - getFirstDayOfMonth(results.month) + 1})
                 </li>
               </div>
-            ))) : search ? (<p className="resultItem">No plans found.</p>) : null}
+            ))) : search ? (<p className="resultItem noHover">No plans found.</p>) : null}
           </div>
         )}
       </div>
