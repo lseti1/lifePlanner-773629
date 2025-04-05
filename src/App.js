@@ -11,7 +11,7 @@ function App() {
   const nextDate = new Date();
   nextDate.setDate(currentDate.getDate() + 1);
   const [currentMonthOnCalendar, setCurrentMonthOnCalendar] = useState(currentMonth);
-  const [gridItems, setGridItems] = useState([]);
+  const [gridItems, setGridItems] = useState(Array(35).fill("").map((_, index) => ({ id: index, text: "" })));
 
   // These are related to having a pop up window (as oppose to a prompt)
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -42,7 +42,7 @@ function App() {
 
   // To Set up the grid of an array of 35, initialising each to nothing and setting id up for each array with empty text for now
   const calculateGridItems = (firstDayIndex, finalDayIndex, currentMonthOnCalendar) => {
-    const gridItems = Array(35).fill("").map((_, index) => ({ id: index, text: "\n " }));
+    // const gridItems = Array(35).fill("").map((_, index) => ({ id: index, text: "\n " }));
 
     // To ensure that plans are still linked to their correct dates even after refreshes
     for (let i = 0; i < sessionStorage.length; i++) {
@@ -169,16 +169,21 @@ function App() {
   const handleSave = () => {
     if (currentEditId !== null) {
       setGridItems((prev) => {
-        const updatedGrid = prev.map((item) => item.id === currentEditId ? { ...item, text: " \n" + modalText } : item);
-
-        console.log("Month in Calendar: ", months[currentMonthOnCalendar]);
-        console.log("Actual Current Month:", months[currentMonth]);
-        return [...updatedGrid];
+        return prev.map((item) => item.id === currentEditId ? { ...item, text: modalText } : item);
       });
 
       savePlan(modalText, currentEditId, currentMonthOnCalendar);
       closeModal();
     }
+  };
+
+  const handleQuickDelete = (e, id) => {
+    e.stopPropagation();
+    setGridItems((prev) => {
+      return prev.map((item) => item.id === id ? { ...item, text: ""} : item);
+    });
+
+    savePlan("", id, currentMonthOnCalendar); 
   };
 
   return (
@@ -215,16 +220,16 @@ function App() {
       </div>
       <div className="daysGrid">
         {gridItems.map((item) => (
-          <div
-            key={item.id}
-            className={`daysGridArrays 
+          <div key={item.id} className={`daysGridArrays 
               ${item.id === currentDayIndex && isCalendarOnCurrentMonth ? "today" : ""}
               ${item.id >= currentDayIndex && item.id < finalDayIndex && isCalendarOnCurrentMonth || currentMonthOnCalendar > currentMonth && item.id > firstDayIndex - 1 && item.id < finalDayIndex ? "" : "noHover"}
-              ${item.id < currentDayIndex && isCalendarOnCurrentMonth || currentMonthOnCalendar < currentMonth ? "pastDay" : ""}
-              `}
-            onClick={() => handleEdit(item.id)} >
-            {item.id >= firstDayIndex && item.id < finalDayIndex && <div className="daysGridDates">{item.id - firstDayIndex + 1}.</div>} {/* This is so that the date doesn't move off */}
+              ${item.id < currentDayIndex && isCalendarOnCurrentMonth || currentMonthOnCalendar < currentMonth ? "pastDay" : ""} `}
+            onClick={() => handleEdit(item.id)}>
+            {item.id >= firstDayIndex && item.id < finalDayIndex && (
+              <div className="daysGridDates">{item.id - firstDayIndex + 1}.</div>
+            )} 
             {item.text}
+            <button className="daysGridArrayButton" onClick={(e) => handleQuickDelete(e, item.id)}>X</button>            
           </div>
         ))}
       </div>
@@ -260,7 +265,7 @@ function App() {
         <p>{TomorrowsPlan ? TomorrowsPlan.plan : "No Plans for Tomorrow."}</p>
       </div>
       <div className="disclaimer">
-        <p>(Best viewed in Full Screen)</p>
+        <p>This app uses Session Storage, plans <br />will not be saved when closed<br />(Also best viewed in Full Screen)</p>
       </div>
     </div>
 
