@@ -160,7 +160,7 @@ function App() {
 
   // TO allow each date to have editable text
   const handleEdit = (id) => {
-    if (id >= currentDayIndex && id < finalDayIndex && currentMonthOnCalendar == currentMonth || currentMonthOnCalendar > currentMonth && id > firstDayIndex && id < finalDayIndex) {
+    if (id >= currentDayIndex && id < finalDayIndex && currentMonthOnCalendar == currentMonth || currentMonthOnCalendar > currentMonth && id >= firstDayIndex && id < finalDayIndex) {
       setCurrentEditId(id);
       setModalText(gridItems[id].text);
       setIsModalVisible(true);
