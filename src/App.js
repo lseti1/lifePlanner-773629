@@ -164,6 +164,7 @@ function App() {
       setCurrentEditId(id);
       setModalText(gridItems[id].text);
       setIsModalVisible(true);
+      console.log("ID = ", id);
     }
   };
 
@@ -262,11 +263,17 @@ function App() {
       <div className="todayText">
         <p>{TodaysPlan ? TodaysPlan.plan.trim() != "" ? TodaysPlan.plan : "No Plans For Today" : "No Plans For Today"}</p>
       </div>
+      <div className="todayTomorrowOverlay planToday" onClick={() => handleEdit(currentDayIndex)}>
+        <h1>Click to Edit</h1>
+      </div>
       <div className="tomorrowTitle">
         <h2>Tomorrow's Plans:</h2>
       </div>
       <div className="tomorrowText">
         <p>{TomorrowsPlan ? TomorrowsPlan.plan.trim() != "" ? TomorrowsPlan.plan : "No Plans For Today" : "No Plans For Today"}</p>
+      </div>
+      <div className="todayTomorrowOverlay planTomorrow" onClick={() => handleEdit(currentDayIndex + 1)}>
+        <h1>Click to Edit</h1>
       </div>
       <div className="disclaimer">
         <p>This app uses Session Storage, plans <br />will not be saved when closed<br />(Also best viewed in Full Screen)</p>

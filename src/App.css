@@ -190,8 +190,6 @@ li {
   right: 1%;
 }
 
-
-
 .daysGridArrays {
   display: relative;
   font-size: 16px;
@@ -440,6 +438,41 @@ textarea {
   top: 69%;
   left: 1%;
 }
+
+.todayTomorrowOverlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  
+  width: 30%;
+  height: 45%;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  text-shadow: black;
+  transition-duration: 0.4s;
+
+  position: absolute;
+}
+
+.todayTomorrowOverlay:hover {
+  background-color: rgba(0, 0, 0, 0.301);
+  backdrop-filter: blur(1px);
+}
+
+.planToday {
+  top: 16%;
+  left: 1%;
+}
+
+.planTomorrow {
+  top: 64%;
+  left: 1%;
+
+  height: 35%;
+}
+
 
 .disclaimer {
   display: flex;
