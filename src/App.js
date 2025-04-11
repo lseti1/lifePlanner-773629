@@ -211,7 +211,14 @@ function App() {
       </div>
       <div className="calendarTitle">
         <button className="calendarButton bt1" onClick={handlePrevMonthClick} >&lt;</button>
-        <h2>{months[currentMonthOnCalendar]}</h2>
+        {/* <h2>{months[currentMonthOnCalendar]}</h2> */}
+        <select className="monthSelector" value={currentMonthOnCalendar} onChange={(e) => setCurrentMonthOnCalendar(e.target.value)}>
+          {months.map((month, index) => (
+            <option key={index} value={index}>
+              {month}
+            </option>
+          ))}
+        </select>
         <button className="calendarButton bt2" onClick={handleNextMonthClick}>&gt;</button>
       </div>
       <div className="daysOfWeek">
