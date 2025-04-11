@@ -58,7 +58,7 @@ p, h1, h2, li {
 .results {
   background-color: #ffffff;
   font-size: 2vh;
-  text-indent: 10px;
+  box-sizing: border-box;
   z-index: 500;
 
   width: 20%;
@@ -76,7 +76,7 @@ li {
 }
 
 .resultItem {
-  padding: 3%;
+  padding: 3% 5%;
   border-bottom: 1px solid #eee;
   transition: 0.4s;
   cursor: pointer;
