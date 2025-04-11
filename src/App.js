@@ -24,8 +24,6 @@ function App() {
   const [isVisible, setIsVisible] = useState(false);
   const searchRef = useRef(null);
 
-  // These are related to the Today/Tomorrow Plan
-
   const getFirstDayOfMonth = (monthIndex) => {
     const year = 2025;
     const firstDayIndex = new Date(year, monthIndex, 1).getDay();
@@ -63,13 +61,9 @@ function App() {
     const firstDayIndex = getFirstDayOfMonth(currentMonthOnCalendar);
     const finalDayIndex = getFirstDayOfMonth(currentMonthOnCalendar) + numberOfDaysInMonth(currentMonthOnCalendar);
 
-
-    console.log("First Day = ", firstDayIndex);
-    console.log("final date = ", finalDayIndex);
-
     const initialGridItems = calculateGridItems(firstDayIndex, finalDayIndex, currentMonthOnCalendar);
     setGridItems(initialGridItems);
-  }, [currentMonthOnCalendar]); // To get called each time currentMonthOnCalendar is changed
+  }, [currentMonthOnCalendar]); 
 
   const changePrevMonth = () => {
     setCurrentMonthOnCalendar((prevIndex) => (prevIndex === 0 ? 11 : prevIndex - 1));
@@ -105,8 +99,6 @@ function App() {
     return storedPlan ? JSON.parse(storedPlan) : null;
   };
 
-
-  // To allow search function for any plans
   const seePlans = () => {
     const allPlans = [];
     for (let i = 0; i < sessionStorage.length; i++) {
@@ -119,7 +111,6 @@ function App() {
     return allPlans;
   }
 
-  // To have all the plans in one place and casing to be ignored when searching
   const searchPlans = (search) => {
     const allPlans = seePlans();
     return allPlans.filter((plan) =>
@@ -127,9 +118,8 @@ function App() {
     );
   };
 
-  // To show results on search bar if active
   useEffect(() => {
-    if (search) {
+    if (search) {   // To show results on search bar if active
       const filteredResults = searchPlans(search);
       setResults(filteredResults);
       setIsVisible(true);
@@ -139,8 +129,7 @@ function App() {
     }
   }, [search]);
 
-  // To hide results when search bar is clicked off
-  const handleMinimising = (event) => {
+  const handleMinimising = (event) => { // To hide results when search bar is clicked off
     if (searchRef.current && !searchRef.current.contains(event.target)) {
       setIsVisible(false);
     }
@@ -287,8 +276,6 @@ function App() {
         <p>This app uses Session Storage, plans <br />will not be saved when closed<br />(Also best viewed in Full Screen)</p>
       </div>
     </div>
-
-
   );
 }
 
