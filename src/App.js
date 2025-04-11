@@ -63,6 +63,7 @@ function App() {
     const firstDayIndex = getFirstDayOfMonth(currentMonthOnCalendar);
     const finalDayIndex = getFirstDayOfMonth(currentMonthOnCalendar) + numberOfDaysInMonth(currentMonthOnCalendar);
 
+
     console.log("First Day = ", firstDayIndex);
     console.log("final date = ", finalDayIndex);
 
@@ -154,13 +155,13 @@ function App() {
 
   const TodaysPlan = getPlan(currentDay + getFirstDayOfMonth(currentMonth) - 1, currentMonth);
   const TomorrowsPlan = getPlan(currentDay + getFirstDayOfMonth(currentMonth), currentMonth);
-  const currentDayIndex = currentDay + firstDayIndex - 1; 
+  const currentDayIndex = currentDay + getFirstDayOfMonth(currentMonth) - 1; 
   const isCalendarOnCurrentMonth = currentMonthOnCalendar === currentMonth;
   const selectedDayIndex = currentEditId - firstDayIndex + 1;
 
   // TO allow each date to have editable text
   const handleEdit = (id) => {
-    if (id >= currentDayIndex && id < finalDayIndex && currentMonthOnCalendar == currentMonth || currentMonthOnCalendar > currentMonth && id >= firstDayIndex && id < finalDayIndex) {
+    if ((id >= currentDayIndex && id < finalDayIndex && currentMonthOnCalendar == currentMonth) || (currentMonthOnCalendar > currentMonth && id >= firstDayIndex && id < finalDayIndex)) {
       setCurrentEditId(id);
       setModalText(gridItems[id].text);
       setIsModalVisible(true);
@@ -270,7 +271,7 @@ function App() {
       <div className="todayText">
         <p>{TodaysPlan ? TodaysPlan.plan.trim() != "" ? TodaysPlan.plan : "No Plans For Today" : "No Plans For Today"}</p>
       </div>
-      <div className="todayTomorrowOverlay planToday" onClick={() => handleEdit(currentDayIndex)}>
+      <div className="todayTomorrowOverlay planToday" onClick={() => {setCurrentMonthOnCalendar(currentMonth); handleEdit(currentDayIndex); }}>
         <h1>Click to Edit</h1>
       </div>
       <div className="tomorrowTitle">
@@ -279,7 +280,7 @@ function App() {
       <div className="tomorrowText">
         <p>{TomorrowsPlan ? TomorrowsPlan.plan.trim() != "" ? TomorrowsPlan.plan : "No Plans For Today" : "No Plans For Today"}</p>
       </div>
-      <div className="todayTomorrowOverlay planTomorrow" onClick={() => handleEdit(currentDayIndex + 1)}>
+      <div className="todayTomorrowOverlay planTomorrow" onClick={() => {setCurrentMonthOnCalendar(currentMonth); handleEdit(currentDayIndex + 1); }}>
         <h1>Click to Edit</h1>
       </div>
       <div className="disclaimer">
