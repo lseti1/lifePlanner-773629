@@ -583,7 +583,7 @@ textarea {
   }
 
   .todayTomorrowOverlay {
-    display: none
+    width: 20%;
   }
 
   .monthSelector option {
@@ -601,6 +601,21 @@ textarea {
 
   .searchBar {
     text-indent: 10px;
+  }
+
+  .calendarButton {
+    background-color: white;
+    /* font-size: 3.5vh; */
+    border-radius: 10px;
+    color: black;
+  }
+
+  .daysGridArrays:hover {
+    background-color: rgba(255, 255, 255, 0);
+  }
+
+  .modalButton {
+    height: 8vh;
   }
 }
 
