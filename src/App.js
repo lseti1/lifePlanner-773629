@@ -181,6 +181,10 @@ function App() {
 
   return (
     <div>
+      <div className="unsupportedMessage">
+        <h1>Attention</h1>
+        <p>This screen size is not supported by this app. <br  />Please use a larger screen to utilise this application.</p>
+      </div>
       <div className="topNamePlate">
         <h1><b>Life Planner</b></h1>
         <h1>{months[currentMonth]} {currentDay}</h1>
