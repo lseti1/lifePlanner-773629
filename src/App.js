@@ -183,7 +183,7 @@ function App() {
     <div>
       <div className="unsupportedMessage">
         <h1>Attention</h1>
-        <p>This screen size is not supported by this app. <br  />Please use a larger screen (Or turn your device to landscape mode) to utilise this application.</p>
+        <p>Please change view to Landscape Mode<br  />(If Application still doesn't show, your device size may not be supported)</p>
       </div>
       <div className="topNamePlate">
         <h1><b>Life Planner</b></h1>
