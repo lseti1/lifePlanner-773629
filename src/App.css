@@ -96,6 +96,7 @@ li {
   display: flex;
   align-items: center;
   justify-content: center; 
+  text-align: center;
   gap: 20px;
   font-size: 2.5vh;
   font-weight: 500;
@@ -605,7 +606,6 @@ textarea {
 
   .calendarButton {
     background-color: white;
-    /* font-size: 3.5vh; */
     border-radius: 10px;
     color: black;
   }
