@@ -560,6 +560,10 @@ textarea {
 
 /* Phones in Landscape */
 @media screen and (orientation: landscape) and (max-width: 1299px) and (max-height: 512px) and (hover: none) {
+  .resultItem:hover, .modalButton:hover, .monthSelector:hover, .calendarButton:hover, .daysGridArrays:hover, .todayTomorrowOverlay:hover, .daysGridArrayDeleteButton:hover {
+    background-color: inherit;
+  }
+
   .topNamePlate {
     border-bottom: 2px solid rgb(255, 210, 87);
   }
