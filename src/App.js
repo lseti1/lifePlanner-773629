@@ -276,7 +276,7 @@ function App() {
         <h1>Click to Edit</h1>
       </div>
       <div className="disclaimer">
-        <p>This app uses Session Storage, plans <br />will not be saved when closed<br />(Also best viewed in Full Screen)</p>
+        <p>This app uses Session Storage, plans <br />will not be saved when closed</p>
       </div>
     </div>
   );
