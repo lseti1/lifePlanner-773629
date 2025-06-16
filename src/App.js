@@ -234,7 +234,7 @@ function App() {
               <div className="daysGridDates">{item.id - firstDayIndex + 1}.</div>
             )} 
             {item.text}
-            <button className="daysGridArrayDeleteButton" onClick={(e) => handleQuickDelete(e, item.id)}>Clear</button>            
+            <button className="daysGridArrayDeleteButton" onClick={(e) => handleQuickDelete(e, item.id)}>X</button>            
           </div>
         ))}
       </div>
@@ -258,25 +258,22 @@ function App() {
       )}
 
       <div className="todayTitle">
-        <h2>Today's Plans:</h2>
+        <h2><b>Today's Plans:</b></h2>
       </div>
       <div className="todayText">
         <p>{TodaysPlan ? TodaysPlan.plan.trim() != "" ? TodaysPlan.plan : "No Plans For Today" : "No Plans For Today"}</p>
       </div>
       <div className="todayTomorrowOverlay planToday" onClick={() => {setCurrentMonthOnCalendar(currentMonth); handleEdit(currentDayIndex); }}>
-        <h1>Click to Edit</h1>
+        <h1>Edit</h1>
       </div>
       <div className="tomorrowTitle">
-        <h2>Tomorrow's Plans:</h2>
+        <h2><b>Tomorrow's Plans:</b></h2>
       </div>
       <div className="tomorrowText">
         <p>{TomorrowsPlan ? TomorrowsPlan.plan.trim() != "" ? TomorrowsPlan.plan : "No Plans For Today" : "No Plans For Today"}</p>
       </div>
       <div className="todayTomorrowOverlay planTomorrow" onClick={() => {setCurrentMonthOnCalendar(currentMonth); handleEdit(currentDayIndex + 1); }}>
-        <h1>Click to Edit</h1>
-      </div>
-      <div className="disclaimer">
-        <p>This app uses Session Storage, plans <br />will not be saved when closed</p>
+        <h1>Edit</h1>
       </div>
     </div>
   );
