@@ -13,16 +13,24 @@ function App() {
   const [currentMonthOnCalendar, setCurrentMonthOnCalendar] = useState(currentMonth);
   const [gridItems, setGridItems] = useState([]);
 
-  // These are related to having a pop up window (as oppose to a prompt)
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalText, setModalText] = useState('');
   const [currentEditId, setCurrentEditId] = useState(null);
 
-  // These are related to Search Bar and the Results
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const searchRef = useRef(null);
+
+  const [showBanner, setShowBanner] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowBanner(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const getFirstDayOfMonth = (monthIndex) => {
     const year = 2025;
@@ -256,6 +264,13 @@ function App() {
           ))}
         </>
       )}
+
+      {showBanner && (
+        <div className="banner">
+        This page uses Session Storage. Any plans made will be deleted after the tab is closed. 
+        </div>
+      )}
+      
 
       <div className="todayTitle">
         <h2><b>Today's Plans:</b></h2>

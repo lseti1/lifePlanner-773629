@@ -479,6 +479,19 @@ textarea {
   height: 100vh;
 }
 
+.banner {
+  display: flex;
+  background-color: rgb(241, 241, 241);
+  padding: 1%;
+  border-radius: 5px;
+  z-index: 1000;
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.1);
+
+  position: absolute;
+  right: 1%;
+  top: 1%;
+} 
+
 /* Small-Medium Phones */
 @media screen and (orientation: portrait) and (max-width: 768px) {
   .unsupportedMessage {
