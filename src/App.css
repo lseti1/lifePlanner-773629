@@ -249,12 +249,16 @@ li {
   z-index: 100;
 }
 
+.today:hover {
+  background-color: rgb(45, 0, 168);
+}
+
 .noHover:hover {
   pointer-events: none; 
 }
 
 .pastDay {
-  color: rgba(0, 0, 0, 0.301);
+  color: rgba(0, 0, 0, 0.13);
   background-color: rgb(245, 245, 245);
 }
 
