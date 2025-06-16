@@ -205,7 +205,7 @@ function App() {
       </div>
       <div className="calendarTitle">
         <button className="calendarButton bt1" onClick={handlePrevMonthClick} >&lt;</button>
-        <select className="monthSelector" value={currentMonthOnCalendar} onChange={(e) => setCurrentMonthOnCalendar(e.target.value)}>
+        <select className="monthSelector" value={currentMonthOnCalendar} onChange={(e) => {const newMonth = Number(e.target.value); setCurrentMonthOnCalendar(newMonth); }}>
           {months.map((month, index) => (
             <option key={index} value={index}>
               {month}
