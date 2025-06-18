@@ -35,7 +35,7 @@ function App() {
   const getFirstDayOfMonth = (monthIndex) => {
     const year = 2025;
     const firstDayIndex = new Date(year, monthIndex, 1).getDay();
-    return firstDayIndex - 1;
+    return firstDayIndex === 0 ? 6 : firstDayIndex - 1;
   };
 
   const numberOfDaysInMonth = (monthIndex) => {
