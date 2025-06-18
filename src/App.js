@@ -190,8 +190,8 @@ function App() {
   return (
     <div>
       <div className="unsupportedMessage">
-        <h1>Attention</h1>
-        <p>Please change view to Landscape Mode<br  />(If Application still doesn't show, your device size may not be supported)</p>
+        <h1>Invalid Screen Size/Orientation</h1>
+        <p>Please change view to Landscape Mode or check whether your viewport size is supported</p>
       </div>
       <div className="topNamePlate">
         <h1><b>Life Planner</b></h1>
