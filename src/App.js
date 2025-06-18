@@ -47,9 +47,9 @@ function App() {
   const firstDayIndex = getFirstDayOfMonth(currentMonthOnCalendar);
   const finalDayIndex = getFirstDayOfMonth(currentMonthOnCalendar) + numberOfDaysInMonth(currentMonthOnCalendar);
 
-  // To Set up the grid of an array of 35, initialising each to nothing and setting id up for each array with empty text for now
+  // To Set up the grid of an array of 42, initialising each to nothing and setting id up for each array with empty text for now
   const calculateGridItems = (firstDayIndex, finalDayIndex, currentMonthOnCalendar) => {
-    const gridItems = Array(35).fill("").map((_, index) => ({ id: index, text: "" }));
+    const gridItems = Array(42).fill("").map((_, index) => ({ id: index, text: "" }));
 
     // To ensure that plans are still linked to their correct dates even after refreshes
     for (let i = 0; i < sessionStorage.length; i++) {
