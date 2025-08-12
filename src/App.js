@@ -158,7 +158,7 @@ function App() {
 
   // TO allow each date to have editable text
   const handleEdit = (id) => {
-    if ((id >= currentDayIndex && id < finalDayIndex && currentMonthOnCalendar == currentMonth) || (currentMonthOnCalendar > currentMonth && id >= firstDayIndex && id < finalDayIndex)) {
+    if ((id >= currentDayIndex && id < finalDayIndex && currentMonthOnCalendar === currentMonth) || (currentMonthOnCalendar > currentMonth && id >= firstDayIndex && id < finalDayIndex)) {
       setCurrentEditId(id);
       setModalText(gridItems[id].text);
       setIsModalVisible(true);
@@ -276,7 +276,7 @@ function App() {
         <h2><b>Today's Plans:</b></h2>
       </div>
       <div className="todayText">
-        <p>{TodaysPlan ? TodaysPlan.plan.trim() != "" ? TodaysPlan.plan : "No Plans For Today" : "No Plans For Today"}</p>
+        <p>{TodaysPlan ? TodaysPlan.plan.trim() !== "" ? TodaysPlan.plan : "No Plans For Today" : "No Plans For Today"}</p>
       </div>
       <div className="todayTomorrowOverlay planToday" onClick={() => {setCurrentMonthOnCalendar(currentMonth); handleEdit(currentDayIndex); }}>
         <h1>Edit</h1>
@@ -285,7 +285,7 @@ function App() {
         <h2><b>Tomorrow's Plans:</b></h2>
       </div>
       <div className="tomorrowText">
-        <p>{TomorrowsPlan ? TomorrowsPlan.plan.trim() != "" ? TomorrowsPlan.plan : "No Plans For Today" : "No Plans For Today"}</p>
+        <p>{TomorrowsPlan ? TomorrowsPlan.plan.trim() !== "" ? TomorrowsPlan.plan : "No Plans For Today" : "No Plans For Today"}</p>
       </div>
       <div className="todayTomorrowOverlay planTomorrow" onClick={() => {setCurrentMonthOnCalendar(currentMonth); handleEdit(currentDayIndex + 1); }}>
         <h1>Edit</h1>
