@@ -119,12 +119,12 @@ function App() {
     return allPlans;
   }
 
-  const searchPlans = (search) => {
+  const searchPlans = React.useCallback((search) => {
     const allPlans = seePlans();
     return allPlans.filter((plan) =>
       plan.plan.toLowerCase().includes(search.toLowerCase())
     );
-  };
+  }, []);
 
   useEffect(() => {
     if (search) {   // To show results on search bar if active
@@ -135,7 +135,7 @@ function App() {
     else {
       setResults([]);
     }
-  }, [search]);
+  }, [search, searchPlans]);
 
   const handleMinimising = (event) => { // To hide results when search bar is clicked off
     if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -235,8 +235,8 @@ function App() {
         {gridItems.map((item) => (
           <div key={item.id} className={`daysGridArrays 
               ${item.id === currentDayIndex && isCalendarOnCurrentMonth ? "today" : ""}
-              ${item.id >= currentDayIndex && item.id < finalDayIndex && isCalendarOnCurrentMonth || currentMonthOnCalendar > currentMonth && item.id > firstDayIndex - 1 && item.id < finalDayIndex ? "" : "noHover"}
-              ${item.id < currentDayIndex && isCalendarOnCurrentMonth || currentMonthOnCalendar < currentMonth ? "pastDay" : ""} `}
+              ${(item.id >= currentDayIndex && item.id < finalDayIndex && isCalendarOnCurrentMonth) || (currentMonthOnCalendar > currentMonth && item.id > firstDayIndex - 1 && item.id < finalDayIndex) ? "" : "noHover"}
+              ${(item.id < currentDayIndex && isCalendarOnCurrentMonth) || (currentMonthOnCalendar < currentMonth) ? "pastDay" : ""} `}
             onClick={() => handleEdit(item.id)}>
             {item.id >= firstDayIndex && item.id < finalDayIndex && (
               <div className="daysGridDates">{item.id - firstDayIndex + 1}.</div>
